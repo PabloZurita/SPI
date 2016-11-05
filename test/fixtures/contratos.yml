@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id_contrato: 1
+  tipo_contrato: MyString
+  linea: one
+
+two:
+  id_contrato: 1
+  tipo_contrato: MyString
+  linea: two

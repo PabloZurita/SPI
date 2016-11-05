@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id_segmento: 1
+  tipo_segmento: MyString
+  linea: one
+
+two:
+  id_segmento: 1
+  tipo_segmento: MyString
+  linea: two

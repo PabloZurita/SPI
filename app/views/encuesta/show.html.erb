@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Id encuesta:</strong>
+  <%= @encuestum.id_encuesta %>
+</p>
+
+<p>
+  <strong>Fecha creacion encuesta:</strong>
+  <%= @encuestum.fecha_creacion_encuesta %>
+</p>
+
+<p>
+  <strong>Motivo encuesta:</strong>
+  <%= @encuestum.motivo_encuesta %>
+</p>
+
+<p>
+  <strong>Resuelto encuesta:</strong>
+  <%= @encuestum.resuelto_encuesta %>
+</p>
+
+<p>
+  <strong>Linea:</strong>
+  <%= @encuestum.linea %>
+</p>
+
+<p>
+  <strong>Pregunta:</strong>
+  <%= @encuestum.pregunta %>
+</p>
+
+<%= link_to 'Edit', edit_encuestum_path(@encuestum) %> |
+<%= link_to 'Back', encuesta_path %>
