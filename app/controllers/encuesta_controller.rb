@@ -69,6 +69,6 @@ class EncuestaController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def encuestum_params
-      params.require(:encuestum).permit(:id_encuesta, :fecha_creacion_encuesta, :motivo_encuesta, :resuelto_encuesta, :linea_id, :pregunta_id)
+      params.require(:encuestum).permit(:id_encuesta, :fecha_creacion_encuesta, :motivo_encuesta, :resuelto_encuesta, :linea_id, :preguntum_id)
     end
 end

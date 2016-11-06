@@ -6,7 +6,7 @@ class CreateEncuesta < ActiveRecord::Migration[5.0]
       t.text :motivo_encuesta
       t.integer :resuelto_encuesta
       t.references :linea, foreign_key: true
-      t.references :pregunta, foreign_key: true
+      t.references :preguntum, foreign_key: true
 
       t.timestamps
     end

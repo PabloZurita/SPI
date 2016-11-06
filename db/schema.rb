@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161105171200) do
+ActiveRecord::Schema.define(version: 20161106083330) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,12 +40,12 @@ ActiveRecord::Schema.define(version: 20161105171200) do
     t.text     "motivo_encuesta"
     t.integer  "resuelto_encuesta"
     t.integer  "linea_id"
-    t.integer  "pregunta_id"
+    t.integer  "preguntum_id"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
     t.index ["id_encuesta"], name: "index_encuesta_on_id_encuesta", unique: true, using: :btree
     t.index ["linea_id"], name: "index_encuesta_on_linea_id", using: :btree
-    t.index ["pregunta_id"], name: "index_encuesta_on_pregunta_id", using: :btree
+    t.index ["preguntum_id"], name: "index_encuesta_on_preguntum_id", using: :btree
   end
 
   create_table "fijomovils", force: :cascade do |t|
@@ -137,7 +137,7 @@ ActiveRecord::Schema.define(version: 20161105171200) do
 
   add_foreign_key "contratos", "lineas"
   add_foreign_key "encuesta", "lineas"
-  add_foreign_key "encuesta", "pregunta", column: "pregunta_id"
+  add_foreign_key "encuesta", "pregunta"
   add_foreign_key "fijomovils", "lineas"
   add_foreign_key "lineas", "clientes"
   add_foreign_key "pagos", "lineas"
