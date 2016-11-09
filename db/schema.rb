@@ -10,28 +10,62 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161106083330) do
+ActiveRecord::Schema.define(version: 20161109040316) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "atravesdes", force: :cascade do |t|
+    t.integer  "pago_id"
+    t.integer  "mdp_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["mdp_id"], name: "index_atravesdes_on_mdp_id", using: :btree
+    t.index ["pago_id"], name: "index_atravesdes_on_pago_id", using: :btree
+  end
+
   create_table "clientes", force: :cascade do |t|
     t.integer  "id_cliente"
     t.string   "rut_cliente"
-    t.string   "nombre_cliente"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.string   "mail_cliente"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.index ["id_cliente"], name: "index_clientes_on_id_cliente", unique: true, using: :btree
+  end
+
+  create_table "contesta", force: :cascade do |t|
+    t.integer  "linea_id"
+    t.integer  "encuesta_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["encuesta_id"], name: "index_contesta_on_encuesta_id", using: :btree
+    t.index ["linea_id"], name: "index_contesta_on_linea_id", using: :btree
+  end
+
+  create_table "contienes", force: :cascade do |t|
+    t.integer  "encuestum_id"
+    t.integer  "preguntum_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["encuestum_id"], name: "index_contienes_on_encuestum_id", using: :btree
+    t.index ["preguntum_id"], name: "index_contienes_on_preguntum_id", using: :btree
+  end
+
+  create_table "contrata", force: :cascade do |t|
+    t.integer  "cliente_id"
+    t.integer  "linea_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cliente_id"], name: "index_contrata_on_cliente_id", using: :btree
+    t.index ["linea_id"], name: "index_contrata_on_linea_id", using: :btree
   end
 
   create_table "contratos", force: :cascade do |t|
     t.integer  "id_contrato"
     t.string   "tipo_contrato"
-    t.integer  "linea_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
     t.index ["id_contrato"], name: "index_contratos_on_id_contrato", unique: true, using: :btree
-    t.index ["linea_id"], name: "index_contratos_on_linea_id", using: :btree
   end
 
   create_table "encuesta", force: :cascade do |t|
@@ -39,31 +73,42 @@ ActiveRecord::Schema.define(version: 20161106083330) do
     t.date     "fecha_creacion_encuesta"
     t.text     "motivo_encuesta"
     t.integer  "resuelto_encuesta"
-    t.integer  "linea_id"
-    t.integer  "preguntum_id"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
     t.index ["id_encuesta"], name: "index_encuesta_on_id_encuesta", unique: true, using: :btree
-    t.index ["linea_id"], name: "index_encuesta_on_linea_id", using: :btree
-    t.index ["preguntum_id"], name: "index_encuesta_on_preguntum_id", using: :btree
+  end
+
+  create_table "es", force: :cascade do |t|
+    t.integer  "fijomovil_id"
+    t.integer  "linea_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["fijomovil_id"], name: "index_es_on_fijomovil_id", using: :btree
+    t.index ["linea_id"], name: "index_es_on_linea_id", using: :btree
+  end
+
+  create_table "es2s", force: :cascade do |t|
+    t.integer  "contrato_id"
+    t.integer  "linea_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["contrato_id"], name: "index_es2s_on_contrato_id", using: :btree
+    t.index ["linea_id"], name: "index_es2s_on_linea_id", using: :btree
   end
 
   create_table "fijomovils", force: :cascade do |t|
     t.integer  "id_fijomovil"
     t.string   "tipo_fijomovil"
-    t.integer  "linea_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.index ["id_fijomovil"], name: "index_fijomovils_on_id_fijomovil", unique: true, using: :btree
-    t.index ["linea_id"], name: "index_fijomovils_on_linea_id", using: :btree
   end
 
   create_table "lineas", force: :cascade do |t|
     t.integer  "id_linea"
-    t.integer  "cliente_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["cliente_id"], name: "index_lineas_on_cliente_id", using: :btree
+    t.string   "numero_cliente"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
     t.index ["id_linea"], name: "index_lineas_on_id_linea", unique: true, using: :btree
   end
 
@@ -90,32 +135,43 @@ ActiveRecord::Schema.define(version: 20161106083330) do
     t.integer  "tel_fijo"
     t.integer  "cod_cliente"
     t.integer  "documento"
-    t.integer  "linea_id"
-    t.integer  "mdp_id"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
     t.index ["id_pago"], name: "index_pagos_on_id_pago", unique: true, using: :btree
-    t.index ["linea_id"], name: "index_pagos_on_linea_id", using: :btree
-    t.index ["mdp_id"], name: "index_pagos_on_mdp_id", using: :btree
   end
 
   create_table "pregunta", force: :cascade do |t|
     t.integer  "id_pregunta"
     t.string   "tipo_pregunta"
-    t.integer  "valor_pregunta"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
     t.index ["id_pregunta"], name: "index_pregunta_on_id_pregunta", unique: true, using: :btree
+  end
+
+  create_table "realizas", force: :cascade do |t|
+    t.integer  "linea_id"
+    t.integer  "pago_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["linea_id"], name: "index_realizas_on_linea_id", using: :btree
+    t.index ["pago_id"], name: "index_realizas_on_pago_id", using: :btree
   end
 
   create_table "segmentos", force: :cascade do |t|
     t.integer  "id_segmento"
     t.string   "tipo_segmento"
-    t.integer  "linea_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
     t.index ["id_segmento"], name: "index_segmentos_on_id_segmento", unique: true, using: :btree
-    t.index ["linea_id"], name: "index_segmentos_on_linea_id", using: :btree
+  end
+
+  create_table "separas", force: :cascade do |t|
+    t.integer  "segmento_id"
+    t.integer  "linea_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["linea_id"], name: "index_separas_on_linea_id", using: :btree
+    t.index ["segmento_id"], name: "index_separas_on_segmento_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -135,12 +191,20 @@ ActiveRecord::Schema.define(version: 20161106083330) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
-  add_foreign_key "contratos", "lineas"
-  add_foreign_key "encuesta", "lineas"
-  add_foreign_key "encuesta", "pregunta"
-  add_foreign_key "fijomovils", "lineas"
-  add_foreign_key "lineas", "clientes"
-  add_foreign_key "pagos", "lineas"
-  add_foreign_key "pagos", "mdps"
-  add_foreign_key "segmentos", "lineas"
+  add_foreign_key "atravesdes", "mdps"
+  add_foreign_key "atravesdes", "pagos"
+  add_foreign_key "contesta", "encuesta", column: "encuesta_id"
+  add_foreign_key "contesta", "lineas"
+  add_foreign_key "contienes", "encuesta"
+  add_foreign_key "contienes", "pregunta"
+  add_foreign_key "contrata", "clientes"
+  add_foreign_key "contrata", "lineas"
+  add_foreign_key "es", "fijomovils"
+  add_foreign_key "es", "lineas"
+  add_foreign_key "es2s", "contratos"
+  add_foreign_key "es2s", "lineas"
+  add_foreign_key "realizas", "lineas"
+  add_foreign_key "realizas", "pagos"
+  add_foreign_key "separas", "lineas"
+  add_foreign_key "separas", "segmentos"
 end

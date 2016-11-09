@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'parcial_calculos/listar'
+
   resources :pagos
   resources :mdps
   resources :encuesta

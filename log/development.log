@@ -5836,3 +5836,1537 @@ Processing by Devise::SessionsController#new as HTML
 Completed 200 OK in 65ms (Views: 63.5ms | ActiveRecord: 0.0ms)
 
 
+  [1m[35mSQL (0.2ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (81.6ms)[0m  [1m[35mCREATE TABLE "clientes" ("id" serial primary key, "id_cliente" integer, "rut_cliente" character varying, "nombre_cliente" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (42.6ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_clientes_on_id_cliente" ON "clientes" USING btree ("id_cliente")[0m
+  [1m[35m (88.0ms)[0m  [1m[35mCREATE TABLE "contratos" ("id" serial primary key, "id_contrato" integer, "tipo_contrato" character varying, "linea_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (41.7ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_contratos_on_id_contrato" ON "contratos" USING btree ("id_contrato")[0m
+  [1m[35m (42.8ms)[0m  [1m[35mCREATE  INDEX  "index_contratos_on_linea_id" ON "contratos" USING btree ("linea_id")[0m
+  [1m[35m (87.1ms)[0m  [1m[35mCREATE TABLE "encuesta" ("id" serial primary key, "id_encuesta" integer, "fecha_creacion_encuesta" date, "motivo_encuesta" text, "resuelto_encuesta" integer, "linea_id" integer, "preguntum_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (42.8ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_encuesta_on_id_encuesta" ON "encuesta" USING btree ("id_encuesta")[0m
+  [1m[35m (31.7ms)[0m  [1m[35mCREATE  INDEX  "index_encuesta_on_linea_id" ON "encuesta" USING btree ("linea_id")[0m
+  [1m[35m (31.3ms)[0m  [1m[35mCREATE  INDEX  "index_encuesta_on_preguntum_id" ON "encuesta" USING btree ("preguntum_id")[0m
+  [1m[35m (76.9ms)[0m  [1m[35mCREATE TABLE "fijomovils" ("id" serial primary key, "id_fijomovil" integer, "tipo_fijomovil" character varying, "linea_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (42.7ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_fijomovils_on_id_fijomovil" ON "fijomovils" USING btree ("id_fijomovil")[0m
+  [1m[35m (42.9ms)[0m  [1m[35mCREATE  INDEX  "index_fijomovils_on_linea_id" ON "fijomovils" USING btree ("linea_id")[0m
+  [1m[35m (43.5ms)[0m  [1m[35mCREATE TABLE "lineas" ("id" serial primary key, "id_linea" integer, "cliente_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (42.7ms)[0m  [1m[35mCREATE  INDEX  "index_lineas_on_cliente_id" ON "lineas" USING btree ("cliente_id")[0m
+  [1m[35m (42.8ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_lineas_on_id_linea" ON "lineas" USING btree ("id_linea")[0m
+  [1m[35m (110.5ms)[0m  [1m[35mCREATE TABLE "mdps" ("id" serial primary key, "id_mdp" integer, "nombre_mdp" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (42.7ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_mdps_on_id_mdp" ON "mdps" USING btree ("id_mdp")[0m
+  [1m[35m (88.1ms)[0m  [1m[35mCREATE TABLE "pagos" ("id" serial primary key, "id_pago" integer, "canal" text, "orden_compra" text, "fecha_transaccion" date, "hora" time, "cod_retorno" integer, "cod_autorizacion" integer, "monto" integer, "fecha_pago" timestamp, "fecha_ident_transaccion" date, "tel_movil" integer, "tel_fijo" integer, "cod_cliente" integer, "documento" integer, "linea_id" integer, "mdp_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (42.7ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_pagos_on_id_pago" ON "pagos" USING btree ("id_pago")[0m
+  [1m[35m (42.8ms)[0m  [1m[35mCREATE  INDEX  "index_pagos_on_linea_id" ON "pagos" USING btree ("linea_id")[0m
+  [1m[35m (42.8ms)[0m  [1m[35mCREATE  INDEX  "index_pagos_on_mdp_id" ON "pagos" USING btree ("mdp_id")[0m
+  [1m[35m (66.1ms)[0m  [1m[35mCREATE TABLE "pregunta" ("id" serial primary key, "id_pregunta" integer, "tipo_pregunta" character varying, "valor_pregunta" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (31.5ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_pregunta_on_id_pregunta" ON "pregunta" USING btree ("id_pregunta")[0m
+  [1m[35m (76.9ms)[0m  [1m[35mCREATE TABLE "segmentos" ("id" serial primary key, "id_segmento" integer, "tipo_segmento" character varying, "linea_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (42.7ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_segmentos_on_id_segmento" ON "segmentos" USING btree ("id_segmento")[0m
+  [1m[35m (42.8ms)[0m  [1m[35mCREATE  INDEX  "index_segmentos_on_linea_id" ON "segmentos" USING btree ("linea_id")[0m
+  [1m[35m (88.9ms)[0m  [1m[35mCREATE TABLE "users" ("id" serial primary key, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" timestamp, "last_sign_in_at" timestamp, "current_sign_in_ip" inet, "last_sign_in_ip" inet, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (42.4ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_email" ON "users" USING btree ("email")[0m
+  [1m[35m (42.8ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_reset_password_token" ON "users" USING btree ("reset_password_token")[0m
+  [1m[35m (10.7ms)[0m  [1m[35mALTER TABLE "contratos" ADD CONSTRAINT "fk_rails_c1e250f8c5"
+FOREIGN KEY ("linea_id")
+  REFERENCES "lineas" ("id")
+[0m
+  [1m[35m (10.8ms)[0m  [1m[35mALTER TABLE "encuesta" ADD CONSTRAINT "fk_rails_0e222ffd7b"
+FOREIGN KEY ("linea_id")
+  REFERENCES "lineas" ("id")
+[0m
+  [1m[35m (10.8ms)[0m  [1m[35mALTER TABLE "encuesta" ADD CONSTRAINT "fk_rails_86d88c3f0f"
+FOREIGN KEY ("preguntum_id")
+  REFERENCES "pregunta" ("id")
+[0m
+  [1m[35m (10.8ms)[0m  [1m[35mALTER TABLE "fijomovils" ADD CONSTRAINT "fk_rails_53c9e5b5aa"
+FOREIGN KEY ("linea_id")
+  REFERENCES "lineas" ("id")
+[0m
+  [1m[35m (10.7ms)[0m  [1m[35mALTER TABLE "lineas" ADD CONSTRAINT "fk_rails_3490f67946"
+FOREIGN KEY ("cliente_id")
+  REFERENCES "clientes" ("id")
+[0m
+  [1m[35m (10.8ms)[0m  [1m[35mALTER TABLE "pagos" ADD CONSTRAINT "fk_rails_31520f1c65"
+FOREIGN KEY ("linea_id")
+  REFERENCES "lineas" ("id")
+[0m
+  [1m[35m (10.7ms)[0m  [1m[35mALTER TABLE "pagos" ADD CONSTRAINT "fk_rails_efd45aa795"
+FOREIGN KEY ("mdp_id")
+  REFERENCES "mdps" ("id")
+[0m
+  [1m[35m (10.8ms)[0m  [1m[35mALTER TABLE "segmentos" ADD CONSTRAINT "fk_rails_5bf541aa67"
+FOREIGN KEY ("linea_id")
+  REFERENCES "lineas" ("id")
+[0m
+  [1m[35m (76.6ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying PRIMARY KEY)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT version FROM "schema_migrations"[0m
+  [1m[35m (10.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES ('20161106083330')[0m
+  [1m[35m (10.9ms)[0m  [1m[32mINSERT INTO schema_migrations (version) VALUES ('20161105171059'), ('20161105171037'), ('20161105171048'), ('20161105171129'), ('20161105171119'), ('20161105171150'), ('20161105171109'), ('20161105171200');
+
+[0m
+  [1m[35m (92.9ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", 2016-11-07 03:48:49 UTC], ["updated_at", 2016-11-07 03:48:49 UTC]]
+  [1m[35m (15.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (89.2ms)[0m  [1m[35mCREATE TABLE "clientes" ("id" serial primary key, "id_cliente" integer, "rut_cliente" character varying, "nombre_cliente" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (42.6ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_clientes_on_id_cliente" ON "clientes" USING btree ("id_cliente")[0m
+  [1m[35m (76.9ms)[0m  [1m[35mCREATE TABLE "contratos" ("id" serial primary key, "id_contrato" integer, "tipo_contrato" character varying, "linea_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (31.7ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_contratos_on_id_contrato" ON "contratos" USING btree ("id_contrato")[0m
+  [1m[35m (31.6ms)[0m  [1m[35mCREATE  INDEX  "index_contratos_on_linea_id" ON "contratos" USING btree ("linea_id")[0m
+  [1m[35m (76.9ms)[0m  [1m[35mCREATE TABLE "encuesta" ("id" serial primary key, "id_encuesta" integer, "fecha_creacion_encuesta" date, "motivo_encuesta" text, "resuelto_encuesta" integer, "linea_id" integer, "preguntum_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (42.6ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_encuesta_on_id_encuesta" ON "encuesta" USING btree ("id_encuesta")[0m
+  [1m[35m (42.7ms)[0m  [1m[35mCREATE  INDEX  "index_encuesta_on_linea_id" ON "encuesta" USING btree ("linea_id")[0m
+  [1m[35m (42.1ms)[0m  [1m[35mCREATE  INDEX  "index_encuesta_on_preguntum_id" ON "encuesta" USING btree ("preguntum_id")[0m
+  [1m[35m (76.9ms)[0m  [1m[35mCREATE TABLE "fijomovils" ("id" serial primary key, "id_fijomovil" integer, "tipo_fijomovil" character varying, "linea_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (42.6ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_fijomovils_on_id_fijomovil" ON "fijomovils" USING btree ("id_fijomovil")[0m
+  [1m[35m (42.8ms)[0m  [1m[35mCREATE  INDEX  "index_fijomovils_on_linea_id" ON "fijomovils" USING btree ("linea_id")[0m
+  [1m[35m (43.6ms)[0m  [1m[35mCREATE TABLE "lineas" ("id" serial primary key, "id_linea" integer, "cliente_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (42.7ms)[0m  [1m[35mCREATE  INDEX  "index_lineas_on_cliente_id" ON "lineas" USING btree ("cliente_id")[0m
+  [1m[35m (42.8ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_lineas_on_id_linea" ON "lineas" USING btree ("id_linea")[0m
+  [1m[35m (100.1ms)[0m  [1m[35mCREATE TABLE "mdps" ("id" serial primary key, "id_mdp" integer, "nombre_mdp" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (53.8ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_mdps_on_id_mdp" ON "mdps" USING btree ("id_mdp")[0m
+  [1m[35m (77.0ms)[0m  [1m[35mCREATE TABLE "pagos" ("id" serial primary key, "id_pago" integer, "canal" text, "orden_compra" text, "fecha_transaccion" date, "hora" time, "cod_retorno" integer, "cod_autorizacion" integer, "monto" integer, "fecha_pago" timestamp, "fecha_ident_transaccion" date, "tel_movil" integer, "tel_fijo" integer, "cod_cliente" integer, "documento" integer, "linea_id" integer, "mdp_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (54.0ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_pagos_on_id_pago" ON "pagos" USING btree ("id_pago")[0m
+  [1m[35m (42.7ms)[0m  [1m[35mCREATE  INDEX  "index_pagos_on_linea_id" ON "pagos" USING btree ("linea_id")[0m
+  [1m[35m (42.7ms)[0m  [1m[35mCREATE  INDEX  "index_pagos_on_mdp_id" ON "pagos" USING btree ("mdp_id")[0m
+  [1m[35m (88.4ms)[0m  [1m[35mCREATE TABLE "pregunta" ("id" serial primary key, "id_pregunta" integer, "tipo_pregunta" character varying, "valor_pregunta" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (53.7ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_pregunta_on_id_pregunta" ON "pregunta" USING btree ("id_pregunta")[0m
+  [1m[35m (88.0ms)[0m  [1m[35mCREATE TABLE "segmentos" ("id" serial primary key, "id_segmento" integer, "tipo_segmento" character varying, "linea_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (42.6ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_segmentos_on_id_segmento" ON "segmentos" USING btree ("id_segmento")[0m
+  [1m[35m (53.9ms)[0m  [1m[35mCREATE  INDEX  "index_segmentos_on_linea_id" ON "segmentos" USING btree ("linea_id")[0m
+  [1m[35m (87.4ms)[0m  [1m[35mCREATE TABLE "users" ("id" serial primary key, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" timestamp, "last_sign_in_at" timestamp, "current_sign_in_ip" inet, "last_sign_in_ip" inet, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (53.8ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_email" ON "users" USING btree ("email")[0m
+  [1m[35m (54.0ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_reset_password_token" ON "users" USING btree ("reset_password_token")[0m
+  [1m[35m (10.8ms)[0m  [1m[35mALTER TABLE "contratos" ADD CONSTRAINT "fk_rails_c1e250f8c5"
+FOREIGN KEY ("linea_id")
+  REFERENCES "lineas" ("id")
+[0m
+  [1m[35m (10.8ms)[0m  [1m[35mALTER TABLE "encuesta" ADD CONSTRAINT "fk_rails_0e222ffd7b"
+FOREIGN KEY ("linea_id")
+  REFERENCES "lineas" ("id")
+[0m
+  [1m[35m (10.8ms)[0m  [1m[35mALTER TABLE "encuesta" ADD CONSTRAINT "fk_rails_86d88c3f0f"
+FOREIGN KEY ("preguntum_id")
+  REFERENCES "pregunta" ("id")
+[0m
+  [1m[35m (10.8ms)[0m  [1m[35mALTER TABLE "fijomovils" ADD CONSTRAINT "fk_rails_53c9e5b5aa"
+FOREIGN KEY ("linea_id")
+  REFERENCES "lineas" ("id")
+[0m
+  [1m[35m (10.7ms)[0m  [1m[35mALTER TABLE "lineas" ADD CONSTRAINT "fk_rails_3490f67946"
+FOREIGN KEY ("cliente_id")
+  REFERENCES "clientes" ("id")
+[0m
+  [1m[35m (10.9ms)[0m  [1m[35mALTER TABLE "pagos" ADD CONSTRAINT "fk_rails_31520f1c65"
+FOREIGN KEY ("linea_id")
+  REFERENCES "lineas" ("id")
+[0m
+  [1m[35m (10.6ms)[0m  [1m[35mALTER TABLE "pagos" ADD CONSTRAINT "fk_rails_efd45aa795"
+FOREIGN KEY ("mdp_id")
+  REFERENCES "mdps" ("id")
+[0m
+  [1m[35m (10.8ms)[0m  [1m[35mALTER TABLE "segmentos" ADD CONSTRAINT "fk_rails_5bf541aa67"
+FOREIGN KEY ("linea_id")
+  REFERENCES "lineas" ("id")
+[0m
+  [1m[35m (76.7ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying PRIMARY KEY)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT version FROM "schema_migrations"[0m
+  [1m[35m (10.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES ('20161106083330')[0m
+  [1m[35m (22.1ms)[0m  [1m[32mINSERT INTO schema_migrations (version) VALUES ('20161105171059'), ('20161105171037'), ('20161105171048'), ('20161105171129'), ('20161105171119'), ('20161105171150'), ('20161105171109'), ('20161105171200');
+
+[0m
+  [1m[35m (80.1ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", 2016-11-07 03:48:51 UTC], ["updated_at", 2016-11-07 03:48:51 UTC]]
+  [1m[35m (7.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(6084241157166926565);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(6084241157166926565)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (2.2ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'clientes'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (2.0ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'contratos'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (2.2ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'encuesta'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (2.0ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'fijomovils'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (1.9ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'lineas'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (1.9ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'mdps'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (1.9ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'pagos'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (1.9ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'pregunta'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (1.9ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'segmentos'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (1.9ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'users'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[36mActiveRecord::SchemaMigration Load (37.0ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (22.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", :environment]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", :environment]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", :environment]]
+  [1m[35mSQL (9.8ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (190.0ms)[0m  [1m[35mDROP TABLE "clientes" CASCADE[0m
+  [1m[35m (268.2ms)[0m  [1m[35mCREATE TABLE "clientes" ("id" serial primary key, "id_cliente" integer, "rut_cliente" character varying, "nombre_cliente" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (48.0ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_clientes_on_id_cliente" ON "clientes" USING btree ("id_cliente")[0m
+  [1m[35m (10.7ms)[0m  [1m[35mDROP TABLE "contratos" CASCADE[0m
+  [1m[35m (88.5ms)[0m  [1m[35mCREATE TABLE "contratos" ("id" serial primary key, "id_contrato" integer, "tipo_contrato" character varying, "linea_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (87.2ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_contratos_on_id_contrato" ON "contratos" USING btree ("id_contrato")[0m
+  [1m[35m (64.8ms)[0m  [1m[35mCREATE  INDEX  "index_contratos_on_linea_id" ON "contratos" USING btree ("linea_id")[0m
+  [1m[35m (32.9ms)[0m  [1m[35mDROP TABLE "encuesta" CASCADE[0m
+  [1m[35m (77.4ms)[0m  [1m[35mCREATE TABLE "encuesta" ("id" serial primary key, "id_encuesta" integer, "fecha_creacion_encuesta" date, "motivo_encuesta" text, "resuelto_encuesta" integer, "linea_id" integer, "preguntum_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (53.7ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_encuesta_on_id_encuesta" ON "encuesta" USING btree ("id_encuesta")[0m
+  [1m[35m (53.9ms)[0m  [1m[35mCREATE  INDEX  "index_encuesta_on_linea_id" ON "encuesta" USING btree ("linea_id")[0m
+  [1m[35m (53.9ms)[0m  [1m[35mCREATE  INDEX  "index_encuesta_on_preguntum_id" ON "encuesta" USING btree ("preguntum_id")[0m
+  [1m[35m (10.0ms)[0m  [1m[35mDROP TABLE "fijomovils" CASCADE[0m
+  [1m[35m (110.8ms)[0m  [1m[35mCREATE TABLE "fijomovils" ("id" serial primary key, "id_fijomovil" integer, "tipo_fijomovil" character varying, "linea_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (41.7ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_fijomovils_on_id_fijomovil" ON "fijomovils" USING btree ("id_fijomovil")[0m
+  [1m[35m (42.1ms)[0m  [1m[35mCREATE  INDEX  "index_fijomovils_on_linea_id" ON "fijomovils" USING btree ("linea_id")[0m
+  [1m[35m (10.4ms)[0m  [1m[35mDROP TABLE "lineas" CASCADE[0m
+  [1m[35m (44.0ms)[0m  [1m[35mCREATE TABLE "lineas" ("id" serial primary key, "id_linea" integer, "cliente_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (42.6ms)[0m  [1m[35mCREATE  INDEX  "index_lineas_on_cliente_id" ON "lineas" USING btree ("cliente_id")[0m
+  [1m[35m (42.9ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_lineas_on_id_linea" ON "lineas" USING btree ("id_linea")[0m
+  [1m[35m (10.0ms)[0m  [1m[35mDROP TABLE "mdps" CASCADE[0m
+  [1m[35m (76.8ms)[0m  [1m[35mCREATE TABLE "mdps" ("id" serial primary key, "id_mdp" integer, "nombre_mdp" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (42.7ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_mdps_on_id_mdp" ON "mdps" USING btree ("id_mdp")[0m
+  [1m[35m (10.8ms)[0m  [1m[35mDROP TABLE "pagos" CASCADE[0m
+  [1m[35m (88.6ms)[0m  [1m[35mCREATE TABLE "pagos" ("id" serial primary key, "id_pago" integer, "canal" text, "orden_compra" text, "fecha_transaccion" date, "hora" time, "cod_retorno" integer, "cod_autorizacion" integer, "monto" integer, "fecha_pago" timestamp, "fecha_ident_transaccion" date, "tel_movil" integer, "tel_fijo" integer, "cod_cliente" integer, "documento" integer, "linea_id" integer, "mdp_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (42.6ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_pagos_on_id_pago" ON "pagos" USING btree ("id_pago")[0m
+  [1m[35m (53.8ms)[0m  [1m[35mCREATE  INDEX  "index_pagos_on_linea_id" ON "pagos" USING btree ("linea_id")[0m
+  [1m[35m (53.8ms)[0m  [1m[35mCREATE  INDEX  "index_pagos_on_mdp_id" ON "pagos" USING btree ("mdp_id")[0m
+  [1m[35m (10.8ms)[0m  [1m[35mDROP TABLE "pregunta" CASCADE[0m
+  [1m[35m (121.9ms)[0m  [1m[35mCREATE TABLE "pregunta" ("id" serial primary key, "id_pregunta" integer, "tipo_pregunta" character varying, "valor_pregunta" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (42.6ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_pregunta_on_id_pregunta" ON "pregunta" USING btree ("id_pregunta")[0m
+  [1m[35m (10.7ms)[0m  [1m[35mDROP TABLE "segmentos" CASCADE[0m
+  [1m[35m (77.4ms)[0m  [1m[35mCREATE TABLE "segmentos" ("id" serial primary key, "id_segmento" integer, "tipo_segmento" character varying, "linea_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (42.6ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_segmentos_on_id_segmento" ON "segmentos" USING btree ("id_segmento")[0m
+  [1m[35m (42.6ms)[0m  [1m[35mCREATE  INDEX  "index_segmentos_on_linea_id" ON "segmentos" USING btree ("linea_id")[0m
+  [1m[35m (10.7ms)[0m  [1m[35mDROP TABLE "users" CASCADE[0m
+  [1m[35m (82.8ms)[0m  [1m[35mCREATE TABLE "users" ("id" serial primary key, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" timestamp, "last_sign_in_at" timestamp, "current_sign_in_ip" inet, "last_sign_in_ip" inet, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (53.7ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_email" ON "users" USING btree ("email")[0m
+  [1m[35m (42.6ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_reset_password_token" ON "users" USING btree ("reset_password_token")[0m
+  [1m[35m (46.1ms)[0m  [1m[35mALTER TABLE "contratos" ADD CONSTRAINT "fk_rails_c1e250f8c5"
+FOREIGN KEY ("linea_id")
+  REFERENCES "lineas" ("id")
+[0m
+  [1m[35m (10.8ms)[0m  [1m[35mALTER TABLE "encuesta" ADD CONSTRAINT "fk_rails_0e222ffd7b"
+FOREIGN KEY ("linea_id")
+  REFERENCES "lineas" ("id")
+[0m
+  [1m[35m (10.5ms)[0m  [1m[35mALTER TABLE "encuesta" ADD CONSTRAINT "fk_rails_86d88c3f0f"
+FOREIGN KEY ("preguntum_id")
+  REFERENCES "pregunta" ("id")
+[0m
+  [1m[35m (10.8ms)[0m  [1m[35mALTER TABLE "fijomovils" ADD CONSTRAINT "fk_rails_53c9e5b5aa"
+FOREIGN KEY ("linea_id")
+  REFERENCES "lineas" ("id")
+[0m
+  [1m[35m (10.6ms)[0m  [1m[35mALTER TABLE "lineas" ADD CONSTRAINT "fk_rails_3490f67946"
+FOREIGN KEY ("cliente_id")
+  REFERENCES "clientes" ("id")
+[0m
+  [1m[35m (10.8ms)[0m  [1m[35mALTER TABLE "pagos" ADD CONSTRAINT "fk_rails_31520f1c65"
+FOREIGN KEY ("linea_id")
+  REFERENCES "lineas" ("id")
+[0m
+  [1m[35m (10.7ms)[0m  [1m[35mALTER TABLE "pagos" ADD CONSTRAINT "fk_rails_efd45aa795"
+FOREIGN KEY ("mdp_id")
+  REFERENCES "mdps" ("id")
+[0m
+  [1m[35m (10.8ms)[0m  [1m[35mALTER TABLE "segmentos" ADD CONSTRAINT "fk_rails_5bf541aa67"
+FOREIGN KEY ("linea_id")
+  REFERENCES "lineas" ("id")
+[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT version FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35mSQL (38.7ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (211.5ms)[0m  [1m[35mDROP TABLE "clientes" CASCADE[0m
+  [1m[35m (333.4ms)[0m  [1m[35mCREATE TABLE "clientes" ("id" serial primary key, "id_cliente" integer, "rut_cliente" character varying, "nombre_cliente" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (53.6ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_clientes_on_id_cliente" ON "clientes" USING btree ("id_cliente")[0m
+  [1m[35m (10.7ms)[0m  [1m[35mDROP TABLE "contratos" CASCADE[0m
+  [1m[35m (88.5ms)[0m  [1m[35mCREATE TABLE "contratos" ("id" serial primary key, "id_contrato" integer, "tipo_contrato" character varying, "linea_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (42.6ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_contratos_on_id_contrato" ON "contratos" USING btree ("id_contrato")[0m
+  [1m[35m (42.7ms)[0m  [1m[35mCREATE  INDEX  "index_contratos_on_linea_id" ON "contratos" USING btree ("linea_id")[0m
+  [1m[35m (32.9ms)[0m  [1m[35mDROP TABLE "encuesta" CASCADE[0m
+  [1m[35m (99.9ms)[0m  [1m[35mCREATE TABLE "encuesta" ("id" serial primary key, "id_encuesta" integer, "fecha_creacion_encuesta" date, "motivo_encuesta" text, "resuelto_encuesta" integer, "linea_id" integer, "preguntum_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (50.9ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_encuesta_on_id_encuesta" ON "encuesta" USING btree ("id_encuesta")[0m
+  [1m[35m (53.8ms)[0m  [1m[35mCREATE  INDEX  "index_encuesta_on_linea_id" ON "encuesta" USING btree ("linea_id")[0m
+  [1m[35m (53.7ms)[0m  [1m[35mCREATE  INDEX  "index_encuesta_on_preguntum_id" ON "encuesta" USING btree ("preguntum_id")[0m
+  [1m[35m (10.6ms)[0m  [1m[35mDROP TABLE "fijomovils" CASCADE[0m
+  [1m[35m (122.1ms)[0m  [1m[35mCREATE TABLE "fijomovils" ("id" serial primary key, "id_fijomovil" integer, "tipo_fijomovil" character varying, "linea_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (53.8ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_fijomovils_on_id_fijomovil" ON "fijomovils" USING btree ("id_fijomovil")[0m
+  [1m[35m (54.0ms)[0m  [1m[35mCREATE  INDEX  "index_fijomovils_on_linea_id" ON "fijomovils" USING btree ("linea_id")[0m
+  [1m[35m (10.4ms)[0m  [1m[35mDROP TABLE "lineas" CASCADE[0m
+  [1m[35m (66.3ms)[0m  [1m[35mCREATE TABLE "lineas" ("id" serial primary key, "id_linea" integer, "cliente_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (53.7ms)[0m  [1m[35mCREATE  INDEX  "index_lineas_on_cliente_id" ON "lineas" USING btree ("cliente_id")[0m
+  [1m[35m (53.9ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_lineas_on_id_linea" ON "lineas" USING btree ("id_linea")[0m
+  [1m[35m (10.7ms)[0m  [1m[35mDROP TABLE "mdps" CASCADE[0m
+  [1m[35m (110.7ms)[0m  [1m[35mCREATE TABLE "mdps" ("id" serial primary key, "id_mdp" integer, "nombre_mdp" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (53.9ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_mdps_on_id_mdp" ON "mdps" USING btree ("id_mdp")[0m
+  [1m[35m (10.4ms)[0m  [1m[35mDROP TABLE "pagos" CASCADE[0m
+  [1m[35m (76.9ms)[0m  [1m[35mCREATE TABLE "pagos" ("id" serial primary key, "id_pago" integer, "canal" text, "orden_compra" text, "fecha_transaccion" date, "hora" time, "cod_retorno" integer, "cod_autorizacion" integer, "monto" integer, "fecha_pago" timestamp, "fecha_ident_transaccion" date, "tel_movil" integer, "tel_fijo" integer, "cod_cliente" integer, "documento" integer, "linea_id" integer, "mdp_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (42.7ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_pagos_on_id_pago" ON "pagos" USING btree ("id_pago")[0m
+  [1m[35m (42.9ms)[0m  [1m[35mCREATE  INDEX  "index_pagos_on_linea_id" ON "pagos" USING btree ("linea_id")[0m
+  [1m[35m (53.9ms)[0m  [1m[35mCREATE  INDEX  "index_pagos_on_mdp_id" ON "pagos" USING btree ("mdp_id")[0m
+  [1m[35m (10.8ms)[0m  [1m[35mDROP TABLE "pregunta" CASCADE[0m
+  [1m[35m (121.9ms)[0m  [1m[35mCREATE TABLE "pregunta" ("id" serial primary key, "id_pregunta" integer, "tipo_pregunta" character varying, "valor_pregunta" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (53.7ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_pregunta_on_id_pregunta" ON "pregunta" USING btree ("id_pregunta")[0m
+  [1m[35m (10.4ms)[0m  [1m[35mDROP TABLE "segmentos" CASCADE[0m
+  [1m[35m (88.7ms)[0m  [1m[35mCREATE TABLE "segmentos" ("id" serial primary key, "id_segmento" integer, "tipo_segmento" character varying, "linea_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (53.5ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_segmentos_on_id_segmento" ON "segmentos" USING btree ("id_segmento")[0m
+  [1m[35m (54.0ms)[0m  [1m[35mCREATE  INDEX  "index_segmentos_on_linea_id" ON "segmentos" USING btree ("linea_id")[0m
+  [1m[35m (10.5ms)[0m  [1m[35mDROP TABLE "users" CASCADE[0m
+  [1m[35m (87.4ms)[0m  [1m[35mCREATE TABLE "users" ("id" serial primary key, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" timestamp, "last_sign_in_at" timestamp, "current_sign_in_ip" inet, "last_sign_in_ip" inet, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (65.0ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_email" ON "users" USING btree ("email")[0m
+  [1m[35m (42.9ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_reset_password_token" ON "users" USING btree ("reset_password_token")[0m
+  [1m[35m (55.2ms)[0m  [1m[35mALTER TABLE "contratos" ADD CONSTRAINT "fk_rails_c1e250f8c5"
+FOREIGN KEY ("linea_id")
+  REFERENCES "lineas" ("id")
+[0m
+  [1m[35m (10.8ms)[0m  [1m[35mALTER TABLE "encuesta" ADD CONSTRAINT "fk_rails_0e222ffd7b"
+FOREIGN KEY ("linea_id")
+  REFERENCES "lineas" ("id")
+[0m
+  [1m[35m (10.8ms)[0m  [1m[35mALTER TABLE "encuesta" ADD CONSTRAINT "fk_rails_86d88c3f0f"
+FOREIGN KEY ("preguntum_id")
+  REFERENCES "pregunta" ("id")
+[0m
+  [1m[35m (10.7ms)[0m  [1m[35mALTER TABLE "fijomovils" ADD CONSTRAINT "fk_rails_53c9e5b5aa"
+FOREIGN KEY ("linea_id")
+  REFERENCES "lineas" ("id")
+[0m
+  [1m[35m (10.7ms)[0m  [1m[35mALTER TABLE "lineas" ADD CONSTRAINT "fk_rails_3490f67946"
+FOREIGN KEY ("cliente_id")
+  REFERENCES "clientes" ("id")
+[0m
+  [1m[35m (10.7ms)[0m  [1m[35mALTER TABLE "pagos" ADD CONSTRAINT "fk_rails_31520f1c65"
+FOREIGN KEY ("linea_id")
+  REFERENCES "lineas" ("id")
+[0m
+  [1m[35m (10.7ms)[0m  [1m[35mALTER TABLE "pagos" ADD CONSTRAINT "fk_rails_efd45aa795"
+FOREIGN KEY ("mdp_id")
+  REFERENCES "mdps" ("id")
+[0m
+  [1m[35m (10.8ms)[0m  [1m[35mALTER TABLE "segmentos" ADD CONSTRAINT "fk_rails_5bf541aa67"
+FOREIGN KEY ("linea_id")
+  REFERENCES "lineas" ("id")
+[0m
+  [1m[35m (29.9ms)[0m  [1m[34mSELECT version FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::InternalMetadata Load (13.3ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", :environment]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", :environment]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", :environment]]
+  [1m[35mSQL (0.2ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (10.4ms)[0m  [1m[35mDROP TABLE "clientes" CASCADE[0m
+  [1m[35m (88.5ms)[0m  [1m[35mCREATE TABLE "clientes" ("id" serial primary key, "id_cliente" integer, "rut_cliente" character varying, "nombre_cliente" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (53.7ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_clientes_on_id_cliente" ON "clientes" USING btree ("id_cliente")[0m
+  [1m[35m (10.4ms)[0m  [1m[35mDROP TABLE "contratos" CASCADE[0m
+  [1m[35m (110.7ms)[0m  [1m[35mCREATE TABLE "contratos" ("id" serial primary key, "id_contrato" integer, "tipo_contrato" character varying, "linea_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (53.8ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_contratos_on_id_contrato" ON "contratos" USING btree ("id_contrato")[0m
+  [1m[35m (52.7ms)[0m  [1m[35mCREATE  INDEX  "index_contratos_on_linea_id" ON "contratos" USING btree ("linea_id")[0m
+  [1m[35m (10.5ms)[0m  [1m[35mDROP TABLE "encuesta" CASCADE[0m
+  [1m[35m (88.4ms)[0m  [1m[35mCREATE TABLE "encuesta" ("id" serial primary key, "id_encuesta" integer, "fecha_creacion_encuesta" date, "motivo_encuesta" text, "resuelto_encuesta" integer, "linea_id" integer, "preguntum_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (42.8ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_encuesta_on_id_encuesta" ON "encuesta" USING btree ("id_encuesta")[0m
+  [1m[35m (42.6ms)[0m  [1m[35mCREATE  INDEX  "index_encuesta_on_linea_id" ON "encuesta" USING btree ("linea_id")[0m
+  [1m[35m (42.7ms)[0m  [1m[35mCREATE  INDEX  "index_encuesta_on_preguntum_id" ON "encuesta" USING btree ("preguntum_id")[0m
+  [1m[35m (10.5ms)[0m  [1m[35mDROP TABLE "fijomovils" CASCADE[0m
+  [1m[35m (77.6ms)[0m  [1m[35mCREATE TABLE "fijomovils" ("id" serial primary key, "id_fijomovil" integer, "tipo_fijomovil" character varying, "linea_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (42.7ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_fijomovils_on_id_fijomovil" ON "fijomovils" USING btree ("id_fijomovil")[0m
+  [1m[35m (52.0ms)[0m  [1m[35mCREATE  INDEX  "index_fijomovils_on_linea_id" ON "fijomovils" USING btree ("linea_id")[0m
+  [1m[35m (10.4ms)[0m  [1m[35mDROP TABLE "lineas" CASCADE[0m
+  [1m[35m (55.2ms)[0m  [1m[35mCREATE TABLE "lineas" ("id" serial primary key, "id_linea" integer, "cliente_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (53.9ms)[0m  [1m[35mCREATE  INDEX  "index_lineas_on_cliente_id" ON "lineas" USING btree ("cliente_id")[0m
+  [1m[35m (53.9ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_lineas_on_id_linea" ON "lineas" USING btree ("id_linea")[0m
+  [1m[35m (10.3ms)[0m  [1m[35mDROP TABLE "mdps" CASCADE[0m
+  [1m[35m (111.0ms)[0m  [1m[35mCREATE TABLE "mdps" ("id" serial primary key, "id_mdp" integer, "nombre_mdp" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (53.8ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_mdps_on_id_mdp" ON "mdps" USING btree ("id_mdp")[0m
+  [1m[35m (10.4ms)[0m  [1m[35mDROP TABLE "pagos" CASCADE[0m
+  [1m[35m (99.6ms)[0m  [1m[35mCREATE TABLE "pagos" ("id" serial primary key, "id_pago" integer, "canal" text, "orden_compra" text, "fecha_transaccion" date, "hora" time, "cod_retorno" integer, "cod_autorizacion" integer, "monto" integer, "fecha_pago" timestamp, "fecha_ident_transaccion" date, "tel_movil" integer, "tel_fijo" integer, "cod_cliente" integer, "documento" integer, "linea_id" integer, "mdp_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (42.5ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_pagos_on_id_pago" ON "pagos" USING btree ("id_pago")[0m
+  [1m[35m (42.9ms)[0m  [1m[35mCREATE  INDEX  "index_pagos_on_linea_id" ON "pagos" USING btree ("linea_id")[0m
+  [1m[35m (42.6ms)[0m  [1m[35mCREATE  INDEX  "index_pagos_on_mdp_id" ON "pagos" USING btree ("mdp_id")[0m
+  [1m[35m (10.5ms)[0m  [1m[35mDROP TABLE "pregunta" CASCADE[0m
+  [1m[35m (77.5ms)[0m  [1m[35mCREATE TABLE "pregunta" ("id" serial primary key, "id_pregunta" integer, "tipo_pregunta" character varying, "valor_pregunta" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (42.6ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_pregunta_on_id_pregunta" ON "pregunta" USING btree ("id_pregunta")[0m
+  [1m[35m (10.5ms)[0m  [1m[35mDROP TABLE "segmentos" CASCADE[0m
+  [1m[35m (88.4ms)[0m  [1m[35mCREATE TABLE "segmentos" ("id" serial primary key, "id_segmento" integer, "tipo_segmento" character varying, "linea_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (52.1ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_segmentos_on_id_segmento" ON "segmentos" USING btree ("id_segmento")[0m
+  [1m[35m (53.9ms)[0m  [1m[35mCREATE  INDEX  "index_segmentos_on_linea_id" ON "segmentos" USING btree ("linea_id")[0m
+  [1m[35m (10.2ms)[0m  [1m[35mDROP TABLE "users" CASCADE[0m
+  [1m[35m (85.6ms)[0m  [1m[35mCREATE TABLE "users" ("id" serial primary key, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" timestamp, "last_sign_in_at" timestamp, "current_sign_in_ip" inet, "last_sign_in_ip" inet, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (53.8ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_email" ON "users" USING btree ("email")[0m
+  [1m[35m (53.9ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_reset_password_token" ON "users" USING btree ("reset_password_token")[0m
+  [1m[35m (10.6ms)[0m  [1m[35mALTER TABLE "contratos" ADD CONSTRAINT "fk_rails_c1e250f8c5"
+FOREIGN KEY ("linea_id")
+  REFERENCES "lineas" ("id")
+[0m
+  [1m[35m (10.7ms)[0m  [1m[35mALTER TABLE "encuesta" ADD CONSTRAINT "fk_rails_0e222ffd7b"
+FOREIGN KEY ("linea_id")
+  REFERENCES "lineas" ("id")
+[0m
+  [1m[35m (10.7ms)[0m  [1m[35mALTER TABLE "encuesta" ADD CONSTRAINT "fk_rails_86d88c3f0f"
+FOREIGN KEY ("preguntum_id")
+  REFERENCES "pregunta" ("id")
+[0m
+  [1m[35m (10.8ms)[0m  [1m[35mALTER TABLE "fijomovils" ADD CONSTRAINT "fk_rails_53c9e5b5aa"
+FOREIGN KEY ("linea_id")
+  REFERENCES "lineas" ("id")
+[0m
+  [1m[35m (10.6ms)[0m  [1m[35mALTER TABLE "lineas" ADD CONSTRAINT "fk_rails_3490f67946"
+FOREIGN KEY ("cliente_id")
+  REFERENCES "clientes" ("id")
+[0m
+  [1m[35m (10.8ms)[0m  [1m[35mALTER TABLE "pagos" ADD CONSTRAINT "fk_rails_31520f1c65"
+FOREIGN KEY ("linea_id")
+  REFERENCES "lineas" ("id")
+[0m
+  [1m[35m (10.7ms)[0m  [1m[35mALTER TABLE "pagos" ADD CONSTRAINT "fk_rails_efd45aa795"
+FOREIGN KEY ("mdp_id")
+  REFERENCES "mdps" ("id")
+[0m
+  [1m[35m (10.7ms)[0m  [1m[35mALTER TABLE "segmentos" ADD CONSTRAINT "fk_rails_5bf541aa67"
+FOREIGN KEY ("linea_id")
+  REFERENCES "lineas" ("id")
+[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT version FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (4.0ms)[0m  [1m[35mDROP TABLE "clientes" CASCADE[0m
+  [1m[35m (99.8ms)[0m  [1m[35mCREATE TABLE "clientes" ("id" serial primary key, "id_cliente" integer, "rut_cliente" character varying, "nombre_cliente" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (42.6ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_clientes_on_id_cliente" ON "clientes" USING btree ("id_cliente")[0m
+  [1m[35m (9.9ms)[0m  [1m[35mDROP TABLE "contratos" CASCADE[0m
+  [1m[35m (77.3ms)[0m  [1m[35mCREATE TABLE "contratos" ("id" serial primary key, "id_contrato" integer, "tipo_contrato" character varying, "linea_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (53.8ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_contratos_on_id_contrato" ON "contratos" USING btree ("id_contrato")[0m
+  [1m[35m (42.7ms)[0m  [1m[35mCREATE  INDEX  "index_contratos_on_linea_id" ON "contratos" USING btree ("linea_id")[0m
+  [1m[35m (10.5ms)[0m  [1m[35mDROP TABLE "encuesta" CASCADE[0m
+  [1m[35m (77.4ms)[0m  [1m[35mCREATE TABLE "encuesta" ("id" serial primary key, "id_encuesta" integer, "fecha_creacion_encuesta" date, "motivo_encuesta" text, "resuelto_encuesta" integer, "linea_id" integer, "preguntum_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (42.6ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_encuesta_on_id_encuesta" ON "encuesta" USING btree ("id_encuesta")[0m
+  [1m[35m (42.7ms)[0m  [1m[35mCREATE  INDEX  "index_encuesta_on_linea_id" ON "encuesta" USING btree ("linea_id")[0m
+  [1m[35m (42.8ms)[0m  [1m[35mCREATE  INDEX  "index_encuesta_on_preguntum_id" ON "encuesta" USING btree ("preguntum_id")[0m
+  [1m[35m (9.8ms)[0m  [1m[35mDROP TABLE "fijomovils" CASCADE[0m
+  [1m[35m (90.3ms)[0m  [1m[35mCREATE TABLE "fijomovils" ("id" serial primary key, "id_fijomovil" integer, "tipo_fijomovil" character varying, "linea_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (53.7ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_fijomovils_on_id_fijomovil" ON "fijomovils" USING btree ("id_fijomovil")[0m
+  [1m[35m (53.8ms)[0m  [1m[35mCREATE  INDEX  "index_fijomovils_on_linea_id" ON "fijomovils" USING btree ("linea_id")[0m
+  [1m[35m (10.4ms)[0m  [1m[35mDROP TABLE "lineas" CASCADE[0m
+  [1m[35m (55.1ms)[0m  [1m[35mCREATE TABLE "lineas" ("id" serial primary key, "id_linea" integer, "cliente_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (53.9ms)[0m  [1m[35mCREATE  INDEX  "index_lineas_on_cliente_id" ON "lineas" USING btree ("cliente_id")[0m
+  [1m[35m (53.8ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_lineas_on_id_linea" ON "lineas" USING btree ("id_linea")[0m
+  [1m[35m (9.6ms)[0m  [1m[35mDROP TABLE "mdps" CASCADE[0m
+  [1m[35m (99.9ms)[0m  [1m[35mCREATE TABLE "mdps" ("id" serial primary key, "id_mdp" integer, "nombre_mdp" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (42.7ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_mdps_on_id_mdp" ON "mdps" USING btree ("id_mdp")[0m
+  [1m[35m (10.5ms)[0m  [1m[35mDROP TABLE "pagos" CASCADE[0m
+  [1m[35m (88.4ms)[0m  [1m[35mCREATE TABLE "pagos" ("id" serial primary key, "id_pago" integer, "canal" text, "orden_compra" text, "fecha_transaccion" date, "hora" time, "cod_retorno" integer, "cod_autorizacion" integer, "monto" integer, "fecha_pago" timestamp, "fecha_ident_transaccion" date, "tel_movil" integer, "tel_fijo" integer, "cod_cliente" integer, "documento" integer, "linea_id" integer, "mdp_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (54.0ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_pagos_on_id_pago" ON "pagos" USING btree ("id_pago")[0m
+  [1m[35m (53.9ms)[0m  [1m[35mCREATE  INDEX  "index_pagos_on_linea_id" ON "pagos" USING btree ("linea_id")[0m
+  [1m[35m (53.9ms)[0m  [1m[35mCREATE  INDEX  "index_pagos_on_mdp_id" ON "pagos" USING btree ("mdp_id")[0m
+  [1m[35m (10.5ms)[0m  [1m[35mDROP TABLE "pregunta" CASCADE[0m
+  [1m[35m (77.5ms)[0m  [1m[35mCREATE TABLE "pregunta" ("id" serial primary key, "id_pregunta" integer, "tipo_pregunta" character varying, "valor_pregunta" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (42.5ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_pregunta_on_id_pregunta" ON "pregunta" USING btree ("id_pregunta")[0m
+  [1m[35m (10.6ms)[0m  [1m[35mDROP TABLE "segmentos" CASCADE[0m
+  [1m[35m (77.4ms)[0m  [1m[35mCREATE TABLE "segmentos" ("id" serial primary key, "id_segmento" integer, "tipo_segmento" character varying, "linea_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (42.6ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_segmentos_on_id_segmento" ON "segmentos" USING btree ("id_segmento")[0m
+  [1m[35m (53.8ms)[0m  [1m[35mCREATE  INDEX  "index_segmentos_on_linea_id" ON "segmentos" USING btree ("linea_id")[0m
+  [1m[35m (10.4ms)[0m  [1m[35mDROP TABLE "users" CASCADE[0m
+  [1m[35m (76.6ms)[0m  [1m[35mCREATE TABLE "users" ("id" serial primary key, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" timestamp, "last_sign_in_at" timestamp, "current_sign_in_ip" inet, "last_sign_in_ip" inet, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (42.5ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_email" ON "users" USING btree ("email")[0m
+  [1m[35m (42.8ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_reset_password_token" ON "users" USING btree ("reset_password_token")[0m
+  [1m[35m (10.6ms)[0m  [1m[35mALTER TABLE "contratos" ADD CONSTRAINT "fk_rails_c1e250f8c5"
+FOREIGN KEY ("linea_id")
+  REFERENCES "lineas" ("id")
+[0m
+  [1m[35m (10.8ms)[0m  [1m[35mALTER TABLE "encuesta" ADD CONSTRAINT "fk_rails_0e222ffd7b"
+FOREIGN KEY ("linea_id")
+  REFERENCES "lineas" ("id")
+[0m
+  [1m[35m (10.7ms)[0m  [1m[35mALTER TABLE "encuesta" ADD CONSTRAINT "fk_rails_86d88c3f0f"
+FOREIGN KEY ("preguntum_id")
+  REFERENCES "pregunta" ("id")
+[0m
+  [1m[35m (10.8ms)[0m  [1m[35mALTER TABLE "fijomovils" ADD CONSTRAINT "fk_rails_53c9e5b5aa"
+FOREIGN KEY ("linea_id")
+  REFERENCES "lineas" ("id")
+[0m
+  [1m[35m (10.7ms)[0m  [1m[35mALTER TABLE "lineas" ADD CONSTRAINT "fk_rails_3490f67946"
+FOREIGN KEY ("cliente_id")
+  REFERENCES "clientes" ("id")
+[0m
+  [1m[35m (10.7ms)[0m  [1m[35mALTER TABLE "pagos" ADD CONSTRAINT "fk_rails_31520f1c65"
+FOREIGN KEY ("linea_id")
+  REFERENCES "lineas" ("id")
+[0m
+  [1m[35m (10.7ms)[0m  [1m[35mALTER TABLE "pagos" ADD CONSTRAINT "fk_rails_efd45aa795"
+FOREIGN KEY ("mdp_id")
+  REFERENCES "mdps" ("id")
+[0m
+  [1m[35m (10.8ms)[0m  [1m[35mALTER TABLE "segmentos" ADD CONSTRAINT "fk_rails_5bf541aa67"
+FOREIGN KEY ("linea_id")
+  REFERENCES "lineas" ("id")
+[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT version FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", :environment]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", :environment]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", :environment]]
+  [1m[35mSQL (0.2ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (44.7ms)[0m  [1m[35mDROP TABLE "clientes" CASCADE[0m
+  [1m[35m (89.8ms)[0m  [1m[35mCREATE TABLE "clientes" ("id" serial primary key, "id_cliente" integer, "rut_cliente" character varying, "nombre_cliente" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (53.6ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_clientes_on_id_cliente" ON "clientes" USING btree ("id_cliente")[0m
+  [1m[35m (10.7ms)[0m  [1m[35mDROP TABLE "contratos" CASCADE[0m
+  [1m[35m (77.5ms)[0m  [1m[35mCREATE TABLE "contratos" ("id" serial primary key, "id_contrato" integer, "tipo_contrato" character varying, "linea_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (42.9ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_contratos_on_id_contrato" ON "contratos" USING btree ("id_contrato")[0m
+  [1m[35m (42.8ms)[0m  [1m[35mCREATE  INDEX  "index_contratos_on_linea_id" ON "contratos" USING btree ("linea_id")[0m
+  [1m[35m (10.6ms)[0m  [1m[35mDROP TABLE "encuesta" CASCADE[0m
+  [1m[35m (77.5ms)[0m  [1m[35mCREATE TABLE "encuesta" ("id" serial primary key, "id_encuesta" integer, "fecha_creacion_encuesta" date, "motivo_encuesta" text, "resuelto_encuesta" integer, "linea_id" integer, "preguntum_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (42.7ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_encuesta_on_id_encuesta" ON "encuesta" USING btree ("id_encuesta")[0m
+  [1m[35m (42.6ms)[0m  [1m[35mCREATE  INDEX  "index_encuesta_on_linea_id" ON "encuesta" USING btree ("linea_id")[0m
+  [1m[35m (42.8ms)[0m  [1m[35mCREATE  INDEX  "index_encuesta_on_preguntum_id" ON "encuesta" USING btree ("preguntum_id")[0m
+  [1m[35m (10.4ms)[0m  [1m[35mDROP TABLE "fijomovils" CASCADE[0m
+  [1m[35m (89.2ms)[0m  [1m[35mCREATE TABLE "fijomovils" ("id" serial primary key, "id_fijomovil" integer, "tipo_fijomovil" character varying, "linea_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (53.6ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_fijomovils_on_id_fijomovil" ON "fijomovils" USING btree ("id_fijomovil")[0m
+  [1m[35m (53.8ms)[0m  [1m[35mCREATE  INDEX  "index_fijomovils_on_linea_id" ON "fijomovils" USING btree ("linea_id")[0m
+  [1m[35m (10.5ms)[0m  [1m[35mDROP TABLE "lineas" CASCADE[0m
+  [1m[35m (55.3ms)[0m  [1m[35mCREATE TABLE "lineas" ("id" serial primary key, "id_linea" integer, "cliente_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (53.8ms)[0m  [1m[35mCREATE  INDEX  "index_lineas_on_cliente_id" ON "lineas" USING btree ("cliente_id")[0m
+  [1m[35m (53.9ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_lineas_on_id_linea" ON "lineas" USING btree ("id_linea")[0m
+  [1m[35m (10.6ms)[0m  [1m[35mDROP TABLE "mdps" CASCADE[0m
+  [1m[35m (99.8ms)[0m  [1m[35mCREATE TABLE "mdps" ("id" serial primary key, "id_mdp" integer, "nombre_mdp" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (64.9ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_mdps_on_id_mdp" ON "mdps" USING btree ("id_mdp")[0m
+  [1m[35m (10.6ms)[0m  [1m[35mDROP TABLE "pagos" CASCADE[0m
+  [1m[35m (88.6ms)[0m  [1m[35mCREATE TABLE "pagos" ("id" serial primary key, "id_pago" integer, "canal" text, "orden_compra" text, "fecha_transaccion" date, "hora" time, "cod_retorno" integer, "cod_autorizacion" integer, "monto" integer, "fecha_pago" timestamp, "fecha_ident_transaccion" date, "tel_movil" integer, "tel_fijo" integer, "cod_cliente" integer, "documento" integer, "linea_id" integer, "mdp_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (53.6ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_pagos_on_id_pago" ON "pagos" USING btree ("id_pago")[0m
+  [1m[35m (53.8ms)[0m  [1m[35mCREATE  INDEX  "index_pagos_on_linea_id" ON "pagos" USING btree ("linea_id")[0m
+  [1m[35m (53.8ms)[0m  [1m[35mCREATE  INDEX  "index_pagos_on_mdp_id" ON "pagos" USING btree ("mdp_id")[0m
+  [1m[35m (10.4ms)[0m  [1m[35mDROP TABLE "pregunta" CASCADE[0m
+  [1m[35m (89.0ms)[0m  [1m[35mCREATE TABLE "pregunta" ("id" serial primary key, "id_pregunta" integer, "tipo_pregunta" character varying, "valor_pregunta" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (42.7ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_pregunta_on_id_pregunta" ON "pregunta" USING btree ("id_pregunta")[0m
+  [1m[35m (10.8ms)[0m  [1m[35mDROP TABLE "segmentos" CASCADE[0m
+  [1m[35m (77.5ms)[0m  [1m[35mCREATE TABLE "segmentos" ("id" serial primary key, "id_segmento" integer, "tipo_segmento" character varying, "linea_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (42.5ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_segmentos_on_id_segmento" ON "segmentos" USING btree ("id_segmento")[0m
+  [1m[35m (42.7ms)[0m  [1m[35mCREATE  INDEX  "index_segmentos_on_linea_id" ON "segmentos" USING btree ("linea_id")[0m
+  [1m[35m (10.4ms)[0m  [1m[35mDROP TABLE "users" CASCADE[0m
+  [1m[35m (108.3ms)[0m  [1m[35mCREATE TABLE "users" ("id" serial primary key, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" timestamp, "last_sign_in_at" timestamp, "current_sign_in_ip" inet, "last_sign_in_ip" inet, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (42.5ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_email" ON "users" USING btree ("email")[0m
+  [1m[35m (42.6ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_reset_password_token" ON "users" USING btree ("reset_password_token")[0m
+  [1m[35m (33.2ms)[0m  [1m[35mALTER TABLE "contratos" ADD CONSTRAINT "fk_rails_c1e250f8c5"
+FOREIGN KEY ("linea_id")
+  REFERENCES "lineas" ("id")
+[0m
+  [1m[35m (10.7ms)[0m  [1m[35mALTER TABLE "encuesta" ADD CONSTRAINT "fk_rails_0e222ffd7b"
+FOREIGN KEY ("linea_id")
+  REFERENCES "lineas" ("id")
+[0m
+  [1m[35m (10.8ms)[0m  [1m[35mALTER TABLE "encuesta" ADD CONSTRAINT "fk_rails_86d88c3f0f"
+FOREIGN KEY ("preguntum_id")
+  REFERENCES "pregunta" ("id")
+[0m
+  [1m[35m (10.7ms)[0m  [1m[35mALTER TABLE "fijomovils" ADD CONSTRAINT "fk_rails_53c9e5b5aa"
+FOREIGN KEY ("linea_id")
+  REFERENCES "lineas" ("id")
+[0m
+  [1m[35m (10.7ms)[0m  [1m[35mALTER TABLE "lineas" ADD CONSTRAINT "fk_rails_3490f67946"
+FOREIGN KEY ("cliente_id")
+  REFERENCES "clientes" ("id")
+[0m
+  [1m[35m (10.7ms)[0m  [1m[35mALTER TABLE "pagos" ADD CONSTRAINT "fk_rails_31520f1c65"
+FOREIGN KEY ("linea_id")
+  REFERENCES "lineas" ("id")
+[0m
+  [1m[35m (10.6ms)[0m  [1m[35mALTER TABLE "pagos" ADD CONSTRAINT "fk_rails_efd45aa795"
+FOREIGN KEY ("mdp_id")
+  REFERENCES "mdps" ("id")
+[0m
+  [1m[35m (10.5ms)[0m  [1m[35mALTER TABLE "segmentos" ADD CONSTRAINT "fk_rails_5bf541aa67"
+FOREIGN KEY ("linea_id")
+  REFERENCES "lineas" ("id")
+[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT version FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (18.3ms)[0m  [1m[35mDROP TABLE "clientes" CASCADE[0m
+  [1m[35m (89.8ms)[0m  [1m[35mCREATE TABLE "clientes" ("id" serial primary key, "id_cliente" integer, "rut_cliente" character varying, "nombre_cliente" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (53.6ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_clientes_on_id_cliente" ON "clientes" USING btree ("id_cliente")[0m
+  [1m[35m (10.7ms)[0m  [1m[35mDROP TABLE "contratos" CASCADE[0m
+  [1m[35m (99.7ms)[0m  [1m[35mCREATE TABLE "contratos" ("id" serial primary key, "id_contrato" integer, "tipo_contrato" character varying, "linea_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (53.9ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_contratos_on_id_contrato" ON "contratos" USING btree ("id_contrato")[0m
+  [1m[35m (53.8ms)[0m  [1m[35mCREATE  INDEX  "index_contratos_on_linea_id" ON "contratos" USING btree ("linea_id")[0m
+  [1m[35m (10.7ms)[0m  [1m[35mDROP TABLE "encuesta" CASCADE[0m
+  [1m[35m (88.7ms)[0m  [1m[35mCREATE TABLE "encuesta" ("id" serial primary key, "id_encuesta" integer, "fecha_creacion_encuesta" date, "motivo_encuesta" text, "resuelto_encuesta" integer, "linea_id" integer, "preguntum_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (42.8ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_encuesta_on_id_encuesta" ON "encuesta" USING btree ("id_encuesta")[0m
+  [1m[35m (42.6ms)[0m  [1m[35mCREATE  INDEX  "index_encuesta_on_linea_id" ON "encuesta" USING btree ("linea_id")[0m
+  [1m[35m (42.8ms)[0m  [1m[35mCREATE  INDEX  "index_encuesta_on_preguntum_id" ON "encuesta" USING btree ("preguntum_id")[0m
+  [1m[35m (10.5ms)[0m  [1m[35mDROP TABLE "fijomovils" CASCADE[0m
+  [1m[35m (88.6ms)[0m  [1m[35mCREATE TABLE "fijomovils" ("id" serial primary key, "id_fijomovil" integer, "tipo_fijomovil" character varying, "linea_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (42.7ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_fijomovils_on_id_fijomovil" ON "fijomovils" USING btree ("id_fijomovil")[0m
+  [1m[35m (42.7ms)[0m  [1m[35mCREATE  INDEX  "index_fijomovils_on_linea_id" ON "fijomovils" USING btree ("linea_id")[0m
+  [1m[35m (10.7ms)[0m  [1m[35mDROP TABLE "lineas" CASCADE[0m
+  [1m[35m (44.1ms)[0m  [1m[35mCREATE TABLE "lineas" ("id" serial primary key, "id_linea" integer, "cliente_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (42.7ms)[0m  [1m[35mCREATE  INDEX  "index_lineas_on_cliente_id" ON "lineas" USING btree ("cliente_id")[0m
+  [1m[35m (42.8ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_lineas_on_id_linea" ON "lineas" USING btree ("id_linea")[0m
+  [1m[35m (10.6ms)[0m  [1m[35mDROP TABLE "mdps" CASCADE[0m
+  [1m[35m (99.7ms)[0m  [1m[35mCREATE TABLE "mdps" ("id" serial primary key, "id_mdp" integer, "nombre_mdp" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (53.8ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_mdps_on_id_mdp" ON "mdps" USING btree ("id_mdp")[0m
+  [1m[35m (10.6ms)[0m  [1m[35mDROP TABLE "pagos" CASCADE[0m
+  [1m[35m (77.5ms)[0m  [1m[35mCREATE TABLE "pagos" ("id" serial primary key, "id_pago" integer, "canal" text, "orden_compra" text, "fecha_transaccion" date, "hora" time, "cod_retorno" integer, "cod_autorizacion" integer, "monto" integer, "fecha_pago" timestamp, "fecha_ident_transaccion" date, "tel_movil" integer, "tel_fijo" integer, "cod_cliente" integer, "documento" integer, "linea_id" integer, "mdp_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (42.7ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_pagos_on_id_pago" ON "pagos" USING btree ("id_pago")[0m
+  [1m[35m (42.8ms)[0m  [1m[35mCREATE  INDEX  "index_pagos_on_linea_id" ON "pagos" USING btree ("linea_id")[0m
+  [1m[35m (42.7ms)[0m  [1m[35mCREATE  INDEX  "index_pagos_on_mdp_id" ON "pagos" USING btree ("mdp_id")[0m
+  [1m[35m (12.4ms)[0m  [1m[35mDROP TABLE "pregunta" CASCADE[0m
+  [1m[35m (77.9ms)[0m  [1m[35mCREATE TABLE "pregunta" ("id" serial primary key, "id_pregunta" integer, "tipo_pregunta" character varying, "valor_pregunta" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (42.8ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_pregunta_on_id_pregunta" ON "pregunta" USING btree ("id_pregunta")[0m
+  [1m[35m (10.7ms)[0m  [1m[35mDROP TABLE "segmentos" CASCADE[0m
+  [1m[35m (88.5ms)[0m  [1m[35mCREATE TABLE "segmentos" ("id" serial primary key, "id_segmento" integer, "tipo_segmento" character varying, "linea_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (42.8ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_segmentos_on_id_segmento" ON "segmentos" USING btree ("id_segmento")[0m
+  [1m[35m (41.6ms)[0m  [1m[35mCREATE  INDEX  "index_segmentos_on_linea_id" ON "segmentos" USING btree ("linea_id")[0m
+  [1m[35m (10.3ms)[0m  [1m[35mDROP TABLE "users" CASCADE[0m
+  [1m[35m (109.7ms)[0m  [1m[35mCREATE TABLE "users" ("id" serial primary key, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" timestamp, "last_sign_in_at" timestamp, "current_sign_in_ip" inet, "last_sign_in_ip" inet, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (53.8ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_email" ON "users" USING btree ("email")[0m
+  [1m[35m (53.9ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_reset_password_token" ON "users" USING btree ("reset_password_token")[0m
+  [1m[35m (22.2ms)[0m  [1m[35mALTER TABLE "contratos" ADD CONSTRAINT "fk_rails_c1e250f8c5"
+FOREIGN KEY ("linea_id")
+  REFERENCES "lineas" ("id")
+[0m
+  [1m[35m (10.7ms)[0m  [1m[35mALTER TABLE "encuesta" ADD CONSTRAINT "fk_rails_0e222ffd7b"
+FOREIGN KEY ("linea_id")
+  REFERENCES "lineas" ("id")
+[0m
+  [1m[35m (10.8ms)[0m  [1m[35mALTER TABLE "encuesta" ADD CONSTRAINT "fk_rails_86d88c3f0f"
+FOREIGN KEY ("preguntum_id")
+  REFERENCES "pregunta" ("id")
+[0m
+  [1m[35m (10.6ms)[0m  [1m[35mALTER TABLE "fijomovils" ADD CONSTRAINT "fk_rails_53c9e5b5aa"
+FOREIGN KEY ("linea_id")
+  REFERENCES "lineas" ("id")
+[0m
+  [1m[35m (10.7ms)[0m  [1m[35mALTER TABLE "lineas" ADD CONSTRAINT "fk_rails_3490f67946"
+FOREIGN KEY ("cliente_id")
+  REFERENCES "clientes" ("id")
+[0m
+  [1m[35m (10.8ms)[0m  [1m[35mALTER TABLE "pagos" ADD CONSTRAINT "fk_rails_31520f1c65"
+FOREIGN KEY ("linea_id")
+  REFERENCES "lineas" ("id")
+[0m
+  [1m[35m (10.7ms)[0m  [1m[35mALTER TABLE "pagos" ADD CONSTRAINT "fk_rails_efd45aa795"
+FOREIGN KEY ("mdp_id")
+  REFERENCES "mdps" ("id")
+[0m
+  [1m[35m (10.8ms)[0m  [1m[35mALTER TABLE "segmentos" ADD CONSTRAINT "fk_rails_5bf541aa67"
+FOREIGN KEY ("linea_id")
+  REFERENCES "lineas" ("id")
+[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT version FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", :environment]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", :environment]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", :environment]]
+  [1m[35mSQL (0.3ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (18.3ms)[0m  [1m[35mDROP TABLE "clientes" CASCADE[0m
+  [1m[35m (88.5ms)[0m  [1m[35mCREATE TABLE "clientes" ("id" serial primary key, "id_cliente" integer, "rut_cliente" character varying, "nombre_cliente" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (53.7ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_clientes_on_id_cliente" ON "clientes" USING btree ("id_cliente")[0m
+  [1m[35m (10.5ms)[0m  [1m[35mDROP TABLE "contratos" CASCADE[0m
+  [1m[35m (88.4ms)[0m  [1m[35mCREATE TABLE "contratos" ("id" serial primary key, "id_contrato" integer, "tipo_contrato" character varying, "linea_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (53.9ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_contratos_on_id_contrato" ON "contratos" USING btree ("id_contrato")[0m
+  [1m[35m (53.8ms)[0m  [1m[35mCREATE  INDEX  "index_contratos_on_linea_id" ON "contratos" USING btree ("linea_id")[0m
+  [1m[35m (10.5ms)[0m  [1m[35mDROP TABLE "encuesta" CASCADE[0m
+  [1m[35m (88.6ms)[0m  [1m[35mCREATE TABLE "encuesta" ("id" serial primary key, "id_encuesta" integer, "fecha_creacion_encuesta" date, "motivo_encuesta" text, "resuelto_encuesta" integer, "linea_id" integer, "preguntum_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (53.7ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_encuesta_on_id_encuesta" ON "encuesta" USING btree ("id_encuesta")[0m
+  [1m[35m (64.9ms)[0m  [1m[35mCREATE  INDEX  "index_encuesta_on_linea_id" ON "encuesta" USING btree ("linea_id")[0m
+  [1m[35m (53.8ms)[0m  [1m[35mCREATE  INDEX  "index_encuesta_on_preguntum_id" ON "encuesta" USING btree ("preguntum_id")[0m
+  [1m[35m (10.4ms)[0m  [1m[35mDROP TABLE "fijomovils" CASCADE[0m
+  [1m[35m (99.6ms)[0m  [1m[35mCREATE TABLE "fijomovils" ("id" serial primary key, "id_fijomovil" integer, "tipo_fijomovil" character varying, "linea_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (53.7ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_fijomovils_on_id_fijomovil" ON "fijomovils" USING btree ("id_fijomovil")[0m
+  [1m[35m (42.6ms)[0m  [1m[35mCREATE  INDEX  "index_fijomovils_on_linea_id" ON "fijomovils" USING btree ("linea_id")[0m
+  [1m[35m (10.4ms)[0m  [1m[35mDROP TABLE "lineas" CASCADE[0m
+  [1m[35m (44.1ms)[0m  [1m[35mCREATE TABLE "lineas" ("id" serial primary key, "id_linea" integer, "cliente_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (42.6ms)[0m  [1m[35mCREATE  INDEX  "index_lineas_on_cliente_id" ON "lineas" USING btree ("cliente_id")[0m
+  [1m[35m (53.8ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_lineas_on_id_linea" ON "lineas" USING btree ("id_linea")[0m
+  [1m[35m (10.5ms)[0m  [1m[35mDROP TABLE "mdps" CASCADE[0m
+  [1m[35m (88.5ms)[0m  [1m[35mCREATE TABLE "mdps" ("id" serial primary key, "id_mdp" integer, "nombre_mdp" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (53.7ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_mdps_on_id_mdp" ON "mdps" USING btree ("id_mdp")[0m
+  [1m[35m (10.5ms)[0m  [1m[35mDROP TABLE "pagos" CASCADE[0m
+  [1m[35m (90.4ms)[0m  [1m[35mCREATE TABLE "pagos" ("id" serial primary key, "id_pago" integer, "canal" text, "orden_compra" text, "fecha_transaccion" date, "hora" time, "cod_retorno" integer, "cod_autorizacion" integer, "monto" integer, "fecha_pago" timestamp, "fecha_ident_transaccion" date, "tel_movil" integer, "tel_fijo" integer, "cod_cliente" integer, "documento" integer, "linea_id" integer, "mdp_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (53.6ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_pagos_on_id_pago" ON "pagos" USING btree ("id_pago")[0m
+  [1m[35m (53.8ms)[0m  [1m[35mCREATE  INDEX  "index_pagos_on_linea_id" ON "pagos" USING btree ("linea_id")[0m
+  [1m[35m (53.8ms)[0m  [1m[35mCREATE  INDEX  "index_pagos_on_mdp_id" ON "pagos" USING btree ("mdp_id")[0m
+  [1m[35m (10.5ms)[0m  [1m[35mDROP TABLE "pregunta" CASCADE[0m
+  [1m[35m (88.6ms)[0m  [1m[35mCREATE TABLE "pregunta" ("id" serial primary key, "id_pregunta" integer, "tipo_pregunta" character varying, "valor_pregunta" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (53.9ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_pregunta_on_id_pregunta" ON "pregunta" USING btree ("id_pregunta")[0m
+  [1m[35m (10.4ms)[0m  [1m[35mDROP TABLE "segmentos" CASCADE[0m
+  [1m[35m (88.5ms)[0m  [1m[35mCREATE TABLE "segmentos" ("id" serial primary key, "id_segmento" integer, "tipo_segmento" character varying, "linea_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (54.0ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_segmentos_on_id_segmento" ON "segmentos" USING btree ("id_segmento")[0m
+  [1m[35m (53.9ms)[0m  [1m[35mCREATE  INDEX  "index_segmentos_on_linea_id" ON "segmentos" USING btree ("linea_id")[0m
+  [1m[35m (10.4ms)[0m  [1m[35mDROP TABLE "users" CASCADE[0m
+  [1m[35m (86.3ms)[0m  [1m[35mCREATE TABLE "users" ("id" serial primary key, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" timestamp, "last_sign_in_at" timestamp, "current_sign_in_ip" inet, "last_sign_in_ip" inet, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (42.6ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_email" ON "users" USING btree ("email")[0m
+  [1m[35m (42.6ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_reset_password_token" ON "users" USING btree ("reset_password_token")[0m
+  [1m[35m (10.5ms)[0m  [1m[35mALTER TABLE "contratos" ADD CONSTRAINT "fk_rails_c1e250f8c5"
+FOREIGN KEY ("linea_id")
+  REFERENCES "lineas" ("id")
+[0m
+  [1m[35m (10.8ms)[0m  [1m[35mALTER TABLE "encuesta" ADD CONSTRAINT "fk_rails_0e222ffd7b"
+FOREIGN KEY ("linea_id")
+  REFERENCES "lineas" ("id")
+[0m
+  [1m[35m (10.8ms)[0m  [1m[35mALTER TABLE "encuesta" ADD CONSTRAINT "fk_rails_86d88c3f0f"
+FOREIGN KEY ("preguntum_id")
+  REFERENCES "pregunta" ("id")
+[0m
+  [1m[35m (10.8ms)[0m  [1m[35mALTER TABLE "fijomovils" ADD CONSTRAINT "fk_rails_53c9e5b5aa"
+FOREIGN KEY ("linea_id")
+  REFERENCES "lineas" ("id")
+[0m
+  [1m[35m (10.6ms)[0m  [1m[35mALTER TABLE "lineas" ADD CONSTRAINT "fk_rails_3490f67946"
+FOREIGN KEY ("cliente_id")
+  REFERENCES "clientes" ("id")
+[0m
+  [1m[35m (10.8ms)[0m  [1m[35mALTER TABLE "pagos" ADD CONSTRAINT "fk_rails_31520f1c65"
+FOREIGN KEY ("linea_id")
+  REFERENCES "lineas" ("id")
+[0m
+  [1m[35m (10.7ms)[0m  [1m[35mALTER TABLE "pagos" ADD CONSTRAINT "fk_rails_efd45aa795"
+FOREIGN KEY ("mdp_id")
+  REFERENCES "mdps" ("id")
+[0m
+  [1m[35m (10.7ms)[0m  [1m[35mALTER TABLE "segmentos" ADD CONSTRAINT "fk_rails_5bf541aa67"
+FOREIGN KEY ("linea_id")
+  REFERENCES "lineas" ("id")
+[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT version FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (17.8ms)[0m  [1m[35mDROP TABLE "clientes" CASCADE[0m
+  [1m[35m (88.4ms)[0m  [1m[35mCREATE TABLE "clientes" ("id" serial primary key, "id_cliente" integer, "rut_cliente" character varying, "nombre_cliente" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (42.5ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_clientes_on_id_cliente" ON "clientes" USING btree ("id_cliente")[0m
+  [1m[35m (10.6ms)[0m  [1m[35mDROP TABLE "contratos" CASCADE[0m
+  [1m[35m (88.5ms)[0m  [1m[35mCREATE TABLE "contratos" ("id" serial primary key, "id_contrato" integer, "tipo_contrato" character varying, "linea_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (64.9ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_contratos_on_id_contrato" ON "contratos" USING btree ("id_contrato")[0m
+  [1m[35m (53.7ms)[0m  [1m[35mCREATE  INDEX  "index_contratos_on_linea_id" ON "contratos" USING btree ("linea_id")[0m
+  [1m[35m (10.7ms)[0m  [1m[35mDROP TABLE "encuesta" CASCADE[0m
+  [1m[35m (88.4ms)[0m  [1m[35mCREATE TABLE "encuesta" ("id" serial primary key, "id_encuesta" integer, "fecha_creacion_encuesta" date, "motivo_encuesta" text, "resuelto_encuesta" integer, "linea_id" integer, "preguntum_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (65.0ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_encuesta_on_id_encuesta" ON "encuesta" USING btree ("id_encuesta")[0m
+  [1m[35m (53.9ms)[0m  [1m[35mCREATE  INDEX  "index_encuesta_on_linea_id" ON "encuesta" USING btree ("linea_id")[0m
+  [1m[35m (54.1ms)[0m  [1m[35mCREATE  INDEX  "index_encuesta_on_preguntum_id" ON "encuesta" USING btree ("preguntum_id")[0m
+  [1m[35m (10.5ms)[0m  [1m[35mDROP TABLE "fijomovils" CASCADE[0m
+  [1m[35m (110.9ms)[0m  [1m[35mCREATE TABLE "fijomovils" ("id" serial primary key, "id_fijomovil" integer, "tipo_fijomovil" character varying, "linea_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (51.9ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_fijomovils_on_id_fijomovil" ON "fijomovils" USING btree ("id_fijomovil")[0m
+  [1m[35m (42.8ms)[0m  [1m[35mCREATE  INDEX  "index_fijomovils_on_linea_id" ON "fijomovils" USING btree ("linea_id")[0m
+  [1m[35m (10.4ms)[0m  [1m[35mDROP TABLE "lineas" CASCADE[0m
+  [1m[35m (44.0ms)[0m  [1m[35mCREATE TABLE "lineas" ("id" serial primary key, "id_linea" integer, "cliente_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (42.7ms)[0m  [1m[35mCREATE  INDEX  "index_lineas_on_cliente_id" ON "lineas" USING btree ("cliente_id")[0m
+  [1m[35m (42.8ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_lineas_on_id_linea" ON "lineas" USING btree ("id_linea")[0m
+  [1m[35m (10.4ms)[0m  [1m[35mDROP TABLE "mdps" CASCADE[0m
+  [1m[35m (77.5ms)[0m  [1m[35mCREATE TABLE "mdps" ("id" serial primary key, "id_mdp" integer, "nombre_mdp" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (42.6ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_mdps_on_id_mdp" ON "mdps" USING btree ("id_mdp")[0m
+  [1m[35m (10.5ms)[0m  [1m[35mDROP TABLE "pagos" CASCADE[0m
+  [1m[35m (88.6ms)[0m  [1m[35mCREATE TABLE "pagos" ("id" serial primary key, "id_pago" integer, "canal" text, "orden_compra" text, "fecha_transaccion" date, "hora" time, "cod_retorno" integer, "cod_autorizacion" integer, "monto" integer, "fecha_pago" timestamp, "fecha_ident_transaccion" date, "tel_movil" integer, "tel_fijo" integer, "cod_cliente" integer, "documento" integer, "linea_id" integer, "mdp_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (53.8ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_pagos_on_id_pago" ON "pagos" USING btree ("id_pago")[0m
+  [1m[35m (53.8ms)[0m  [1m[35mCREATE  INDEX  "index_pagos_on_linea_id" ON "pagos" USING btree ("linea_id")[0m
+  [1m[35m (53.8ms)[0m  [1m[35mCREATE  INDEX  "index_pagos_on_mdp_id" ON "pagos" USING btree ("mdp_id")[0m
+  [1m[35m (10.5ms)[0m  [1m[35mDROP TABLE "pregunta" CASCADE[0m
+  [1m[35m (99.6ms)[0m  [1m[35mCREATE TABLE "pregunta" ("id" serial primary key, "id_pregunta" integer, "tipo_pregunta" character varying, "valor_pregunta" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (53.8ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_pregunta_on_id_pregunta" ON "pregunta" USING btree ("id_pregunta")[0m
+  [1m[35m (10.5ms)[0m  [1m[35mDROP TABLE "segmentos" CASCADE[0m
+  [1m[35m (99.5ms)[0m  [1m[35mCREATE TABLE "segmentos" ("id" serial primary key, "id_segmento" integer, "tipo_segmento" character varying, "linea_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (42.8ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_segmentos_on_id_segmento" ON "segmentos" USING btree ("id_segmento")[0m
+  [1m[35m (42.7ms)[0m  [1m[35mCREATE  INDEX  "index_segmentos_on_linea_id" ON "segmentos" USING btree ("linea_id")[0m
+  [1m[35m (10.5ms)[0m  [1m[35mDROP TABLE "users" CASCADE[0m
+  [1m[35m (76.7ms)[0m  [1m[35mCREATE TABLE "users" ("id" serial primary key, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" timestamp, "last_sign_in_at" timestamp, "current_sign_in_ip" inet, "last_sign_in_ip" inet, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (42.6ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_email" ON "users" USING btree ("email")[0m
+  [1m[35m (42.7ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_reset_password_token" ON "users" USING btree ("reset_password_token")[0m
+  [1m[35m (10.7ms)[0m  [1m[35mALTER TABLE "contratos" ADD CONSTRAINT "fk_rails_c1e250f8c5"
+FOREIGN KEY ("linea_id")
+  REFERENCES "lineas" ("id")
+[0m
+  [1m[35m (10.9ms)[0m  [1m[35mALTER TABLE "encuesta" ADD CONSTRAINT "fk_rails_0e222ffd7b"
+FOREIGN KEY ("linea_id")
+  REFERENCES "lineas" ("id")
+[0m
+  [1m[35m (10.6ms)[0m  [1m[35mALTER TABLE "encuesta" ADD CONSTRAINT "fk_rails_86d88c3f0f"
+FOREIGN KEY ("preguntum_id")
+  REFERENCES "pregunta" ("id")
+[0m
+  [1m[35m (10.8ms)[0m  [1m[35mALTER TABLE "fijomovils" ADD CONSTRAINT "fk_rails_53c9e5b5aa"
+FOREIGN KEY ("linea_id")
+  REFERENCES "lineas" ("id")
+[0m
+  [1m[35m (10.7ms)[0m  [1m[35mALTER TABLE "lineas" ADD CONSTRAINT "fk_rails_3490f67946"
+FOREIGN KEY ("cliente_id")
+  REFERENCES "clientes" ("id")
+[0m
+  [1m[35m (10.8ms)[0m  [1m[35mALTER TABLE "pagos" ADD CONSTRAINT "fk_rails_31520f1c65"
+FOREIGN KEY ("linea_id")
+  REFERENCES "lineas" ("id")
+[0m
+  [1m[35m (10.7ms)[0m  [1m[35mALTER TABLE "pagos" ADD CONSTRAINT "fk_rails_efd45aa795"
+FOREIGN KEY ("mdp_id")
+  REFERENCES "mdps" ("id")
+[0m
+  [1m[35m (10.8ms)[0m  [1m[35mALTER TABLE "segmentos" ADD CONSTRAINT "fk_rails_5bf541aa67"
+FOREIGN KEY ("linea_id")
+  REFERENCES "lineas" ("id")
+[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT version FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.5ms)[0m  [1m[34mSELECT MAX("clientes"."id_cliente") FROM "clientes"[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "clientes" ("id_cliente", "rut_cliente", "nombre_cliente", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["id_cliente", 1], ["rut_cliente", "125516203"], ["nombre_cliente", "ingrid_carolag@hotmail.com"], ["created_at", 2016-11-09 03:33:51 UTC], ["updated_at", 2016-11-09 03:33:51 UTC]]
+  [1m[35m (20.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT MAX("clientes"."id_cliente") FROM "clientes"[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "clientes" ("id_cliente", "rut_cliente", "nombre_cliente", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["id_cliente", 2], ["rut_cliente", "112660267"], ["nombre_cliente", "cacs1976@hotmail.com"], ["created_at", 2016-11-09 03:33:51 UTC], ["updated_at", 2016-11-09 03:33:51 UTC]]
+  [1m[35m (8.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT MAX("clientes"."id_cliente") FROM "clientes"[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "clientes" ("id_cliente", "rut_cliente", "nombre_cliente", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["id_cliente", 3], ["rut_cliente", "Belgium"], ["nombre_cliente", "juan_mart_inez_g@yahoo.com"], ["created_at", 2016-11-09 03:33:51 UTC], ["updated_at", 2016-11-09 03:33:51 UTC]]
+  [1m[35m (8.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT MAX("clientes"."id_cliente") FROM "clientes"[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "clientes" ("id_cliente", "rut_cliente", "nombre_cliente", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["id_cliente", 4], ["rut_cliente", "70316471"], ["nombre_cliente", "aleneumannp@gmail.com"], ["created_at", 2016-11-09 03:33:51 UTC], ["updated_at", 2016-11-09 03:33:51 UTC]]
+  [1m[35m (8.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT MAX("clientes"."id_cliente") FROM "clientes"[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "clientes" ("id_cliente", "rut_cliente", "nombre_cliente", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["id_cliente", 5], ["rut_cliente", "125516203"], ["nombre_cliente", "ingrid_carolag@hotmail.com"], ["created_at", 2016-11-09 03:35:09 UTC], ["updated_at", 2016-11-09 03:35:09 UTC]]
+  [1m[35m (14.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT MAX("clientes"."id_cliente") FROM "clientes"[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "clientes" ("id_cliente", "rut_cliente", "nombre_cliente", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["id_cliente", 6], ["rut_cliente", "53433642"], ["nombre_cliente", "cacs1976@hotmail.com"], ["created_at", 2016-11-09 03:35:09 UTC], ["updated_at", 2016-11-09 03:35:09 UTC]]
+  [1m[35m (8.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT MAX("clientes"."id_cliente") FROM "clientes"[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "clientes" ("id_cliente", "rut_cliente", "nombre_cliente", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["id_cliente", 7], ["rut_cliente", "112660267"], ["nombre_cliente", "juan_mart_inez_g@yahoo.com"], ["created_at", 2016-11-09 03:35:09 UTC], ["updated_at", 2016-11-09 03:35:09 UTC]]
+  [1m[35m (8.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT MAX("clientes"."id_cliente") FROM "clientes"[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "clientes" ("id_cliente", "rut_cliente", "nombre_cliente", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["id_cliente", 8], ["rut_cliente", "70316471"], ["nombre_cliente", "aleneumannp@gmail.com"], ["created_at", 2016-11-09 03:35:09 UTC], ["updated_at", 2016-11-09 03:35:09 UTC]]
+  [1m[35m (8.7ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/parcial_calculos/listar" for 127.0.0.1 at 2016-11-09 00:46:49 -0300
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by ParcialCalculosController#listar as HTML
+Completed 401 Unauthorized in 20ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2016-11-09 00:46:50 -0300
+Processing by Devise::SessionsController#new as HTML
+  Rendering /var/lib/gems/2.3.0/gems/devise-4.2.0/app/views/devise/sessions/new.html.erb within layouts/application
+  Rendered /var/lib/gems/2.3.0/gems/devise-4.2.0/app/views/devise/shared/_links.html.erb (1.7ms)
+  Rendered /var/lib/gems/2.3.0/gems/devise-4.2.0/app/views/devise/sessions/new.html.erb within layouts/application (39.3ms)
+Completed 200 OK in 996ms (Views: 971.1ms | ActiveRecord: 3.6ms)
+
+
+Started GET "/parcial_calculos/listar" for 127.0.0.1 at 2016-11-09 00:47:13 -0300
+Processing by ParcialCalculosController#listar as HTML
+Completed 401 Unauthorized in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2016-11-09 00:47:13 -0300
+Processing by Devise::SessionsController#new as HTML
+  Rendering /var/lib/gems/2.3.0/gems/devise-4.2.0/app/views/devise/sessions/new.html.erb within layouts/application
+  Rendered /var/lib/gems/2.3.0/gems/devise-4.2.0/app/views/devise/shared/_links.html.erb (0.9ms)
+  Rendered /var/lib/gems/2.3.0/gems/devise-4.2.0/app/views/devise/sessions/new.html.erb within layouts/application (4.2ms)
+Completed 200 OK in 39ms (Views: 38.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_up" for 127.0.0.1 at 2016-11-09 00:47:32 -0300
+Processing by Devise::RegistrationsController#new as HTML
+  Rendering /var/lib/gems/2.3.0/gems/devise-4.2.0/app/views/devise/registrations/new.html.erb within layouts/application
+  Rendered /var/lib/gems/2.3.0/gems/devise-4.2.0/app/views/devise/shared/_links.html.erb (0.9ms)
+  Rendered /var/lib/gems/2.3.0/gems/devise-4.2.0/app/views/devise/registrations/new.html.erb within layouts/application (3.9ms)
+Completed 200 OK in 108ms (Views: 106.6ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2016-11-09 00:47:57 -0300
+Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"8+2lHV6cQTfTgVOzVAYuoAo3D2sNMYAuN2pkRAVTTfIlZ8ICbZ60nDoYD4z1eFiQeDs+KB+gtngFLAF+0Hqpng==", "user"=>{"email"=>"prueba@p.p", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up"}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.9ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "prueba@p.p"], ["LIMIT", 1]]
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["email", "prueba@p.p"], ["encrypted_password", "$2a$11$alkWXu.SSmIhefZlmK5/beHS8stzidwI/Lm9wX2to7QwW7nezJjs6"], ["created_at", 2016-11-09 03:47:57 UTC], ["updated_at", 2016-11-09 03:47:57 UTC]]
+  [1m[35m (15.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[33mUPDATE "users" SET "sign_in_count" = $1, "current_sign_in_at" = $2, "last_sign_in_at" = $3, "current_sign_in_ip" = $4, "last_sign_in_ip" = $5, "updated_at" = $6 WHERE "users"."id" = $7[0m  [["sign_in_count", 1], ["current_sign_in_at", 2016-11-09 03:47:57 UTC], ["last_sign_in_at", 2016-11-09 03:47:57 UTC], ["current_sign_in_ip", "127.0.0.1/32"], ["last_sign_in_ip", "127.0.0.1/32"], ["updated_at", 2016-11-09 03:47:57 UTC], ["id", 1]]
+  [1m[35m (7.1ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/parcial_calculos/listar
+Completed 302 Found in 378ms (ActiveRecord: 24.9ms)
+
+
+Started GET "/parcial_calculos/listar" for 127.0.0.1 at 2016-11-09 00:47:57 -0300
+Processing by ParcialCalculosController#listar as HTML
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering parcial_calculos/listar.html.erb within layouts/application
+  Rendered parcial_calculos/listar.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 38ms (Views: 35.2ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/parcial_calculos/listar" for 127.0.0.1 at 2016-11-09 00:48:02 -0300
+Processing by ParcialCalculosController#listar as HTML
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering parcial_calculos/listar.html.erb within layouts/application
+  Rendered parcial_calculos/listar.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 49ms (Views: 45.8ms | ActiveRecord: 0.8ms)
+
+
+  [1m[35mSQL (0.3ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (61.0ms)[0m  [1m[35mCREATE TABLE "atravesdes" ("id" serial primary key, "pago_id" integer, "mdp_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (53.6ms)[0m  [1m[35mCREATE  INDEX  "index_atravesdes_on_mdp_id" ON "atravesdes" USING btree ("mdp_id")[0m
+  [1m[35m (53.9ms)[0m  [1m[35mCREATE  INDEX  "index_atravesdes_on_pago_id" ON "atravesdes" USING btree ("pago_id")[0m
+  [1m[35m (99.3ms)[0m  [1m[35mCREATE TABLE "clientes" ("id" serial primary key, "id_cliente" integer, "rut_cliente" character varying, "mail_cliente" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (42.7ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_clientes_on_id_cliente" ON "clientes" USING btree ("id_cliente")[0m
+  [1m[35m (43.6ms)[0m  [1m[35mCREATE TABLE "contesta" ("id" serial primary key, "linea_id" integer, "encuesta_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (42.7ms)[0m  [1m[35mCREATE  INDEX  "index_contesta_on_encuesta_id" ON "contesta" USING btree ("encuesta_id")[0m
+  [1m[35m (42.8ms)[0m  [1m[35mCREATE  INDEX  "index_contesta_on_linea_id" ON "contesta" USING btree ("linea_id")[0m
+  [1m[35m (43.5ms)[0m  [1m[35mCREATE TABLE "contienes" ("id" serial primary key, "encuestum_id" integer, "preguntum_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (42.7ms)[0m  [1m[35mCREATE  INDEX  "index_contienes_on_encuestum_id" ON "contienes" USING btree ("encuestum_id")[0m
+  [1m[35m (54.1ms)[0m  [1m[35mCREATE  INDEX  "index_contienes_on_preguntum_id" ON "contienes" USING btree ("preguntum_id")[0m
+  [1m[35m (42.5ms)[0m  [1m[35mCREATE TABLE "contrata" ("id" serial primary key, "cliente_id" integer, "linea_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (42.1ms)[0m  [1m[35mCREATE  INDEX  "index_contrata_on_cliente_id" ON "contrata" USING btree ("cliente_id")[0m
+  [1m[35m (40.4ms)[0m  [1m[35mCREATE  INDEX  "index_contrata_on_linea_id" ON "contrata" USING btree ("linea_id")[0m
+  [1m[35m (88.1ms)[0m  [1m[35mCREATE TABLE "contratos" ("id" serial primary key, "id_contrato" integer, "tipo_contrato" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (53.8ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_contratos_on_id_contrato" ON "contratos" USING btree ("id_contrato")[0m
+  [1m[35m (88.0ms)[0m  [1m[35mCREATE TABLE "encuesta" ("id" serial primary key, "id_encuesta" integer, "fecha_creacion_encuesta" date, "motivo_encuesta" text, "resuelto_encuesta" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (54.0ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_encuesta_on_id_encuesta" ON "encuesta" USING btree ("id_encuesta")[0m
+  [1m[35m (53.3ms)[0m  [1m[35mCREATE TABLE "es" ("id" serial primary key, "fijomovil_id" integer, "linea_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (53.0ms)[0m  [1m[35mCREATE  INDEX  "index_es_on_fijomovil_id" ON "es" USING btree ("fijomovil_id")[0m
+  [1m[35m (53.6ms)[0m  [1m[35mCREATE  INDEX  "index_es_on_linea_id" ON "es" USING btree ("linea_id")[0m
+  [1m[35m (65.9ms)[0m  [1m[35mCREATE TABLE "es2s" ("id" serial primary key, "contrato_id" integer, "linea_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (53.7ms)[0m  [1m[35mCREATE  INDEX  "index_es2s_on_contrato_id" ON "es2s" USING btree ("contrato_id")[0m
+  [1m[35m (53.8ms)[0m  [1m[35mCREATE  INDEX  "index_es2s_on_linea_id" ON "es2s" USING btree ("linea_id")[0m
+  [1m[35m (110.4ms)[0m  [1m[35mCREATE TABLE "fijomovils" ("id" serial primary key, "id_fijomovil" integer, "tipo_fijomovil" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (76.1ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_fijomovils_on_id_fijomovil" ON "fijomovils" USING btree ("id_fijomovil")[0m
+  [1m[35m (87.9ms)[0m  [1m[35mCREATE TABLE "lineas" ("id" serial primary key, "id_linea" integer, "numero_cliente" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (53.9ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_lineas_on_id_linea" ON "lineas" USING btree ("id_linea")[0m
+  [1m[35m (76.8ms)[0m  [1m[35mCREATE TABLE "mdps" ("id" serial primary key, "id_mdp" integer, "nombre_mdp" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (42.7ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_mdps_on_id_mdp" ON "mdps" USING btree ("id_mdp")[0m
+  [1m[35m (99.1ms)[0m  [1m[35mCREATE TABLE "pagos" ("id" serial primary key, "id_pago" integer, "canal" text, "orden_compra" text, "fecha_transaccion" date, "hora" time, "cod_retorno" integer, "cod_autorizacion" integer, "monto" integer, "fecha_pago" timestamp, "fecha_ident_transaccion" date, "tel_movil" integer, "tel_fijo" integer, "cod_cliente" integer, "documento" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (53.7ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_pagos_on_id_pago" ON "pagos" USING btree ("id_pago")[0m
+  [1m[35m (77.1ms)[0m  [1m[35mCREATE TABLE "pregunta" ("id" serial primary key, "id_pregunta" integer, "tipo_pregunta" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (53.7ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_pregunta_on_id_pregunta" ON "pregunta" USING btree ("id_pregunta")[0m
+  [1m[35m (54.6ms)[0m  [1m[35mCREATE TABLE "realizas" ("id" serial primary key, "linea_id" integer, "pago_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (53.8ms)[0m  [1m[35mCREATE  INDEX  "index_realizas_on_linea_id" ON "realizas" USING btree ("linea_id")[0m
+  [1m[35m (53.9ms)[0m  [1m[35mCREATE  INDEX  "index_realizas_on_pago_id" ON "realizas" USING btree ("pago_id")[0m
+  [1m[35m (98.2ms)[0m  [1m[35mCREATE TABLE "segmentos" ("id" serial primary key, "id_segmento" integer, "tipo_segmento" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (54.0ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_segmentos_on_id_segmento" ON "segmentos" USING btree ("id_segmento")[0m
+  [1m[35m (54.6ms)[0m  [1m[35mCREATE TABLE "separas" ("id" serial primary key, "segmento_id" integer, "linea_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (54.0ms)[0m  [1m[35mCREATE  INDEX  "index_separas_on_linea_id" ON "separas" USING btree ("linea_id")[0m
+  [1m[35m (42.6ms)[0m  [1m[35mCREATE  INDEX  "index_separas_on_segmento_id" ON "separas" USING btree ("segmento_id")[0m
+  [1m[35m (83.1ms)[0m  [1m[35mCREATE TABLE "users" ("id" serial primary key, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" timestamp, "last_sign_in_at" timestamp, "current_sign_in_ip" inet, "last_sign_in_ip" inet, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (42.7ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_email" ON "users" USING btree ("email")[0m
+  [1m[35m (53.8ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_reset_password_token" ON "users" USING btree ("reset_password_token")[0m
+  [1m[35m (10.7ms)[0m  [1m[35mALTER TABLE "atravesdes" ADD CONSTRAINT "fk_rails_e6827fc5d3"
+FOREIGN KEY ("mdp_id")
+  REFERENCES "mdps" ("id")
+[0m
+  [1m[35m (10.8ms)[0m  [1m[35mALTER TABLE "atravesdes" ADD CONSTRAINT "fk_rails_e4d0d4cb75"
+FOREIGN KEY ("pago_id")
+  REFERENCES "pagos" ("id")
+[0m
+  [1m[35m (10.9ms)[0m  [1m[35mALTER TABLE "contesta" ADD CONSTRAINT "fk_rails_a2565d943e"
+FOREIGN KEY ("encuesta_id")
+  REFERENCES "encuesta" ("id")
+[0m
+  [1m[35m (10.8ms)[0m  [1m[35mALTER TABLE "contesta" ADD CONSTRAINT "fk_rails_e75083ea85"
+FOREIGN KEY ("linea_id")
+  REFERENCES "lineas" ("id")
+[0m
+  [1m[35m (10.8ms)[0m  [1m[35mALTER TABLE "contienes" ADD CONSTRAINT "fk_rails_20933a9f07"
+FOREIGN KEY ("encuestum_id")
+  REFERENCES "encuesta" ("id")
+[0m
+  [1m[35m (10.8ms)[0m  [1m[35mALTER TABLE "contienes" ADD CONSTRAINT "fk_rails_5d5134adb4"
+FOREIGN KEY ("preguntum_id")
+  REFERENCES "pregunta" ("id")
+[0m
+  [1m[35m (10.8ms)[0m  [1m[35mALTER TABLE "contrata" ADD CONSTRAINT "fk_rails_4646870d7d"
+FOREIGN KEY ("cliente_id")
+  REFERENCES "clientes" ("id")
+[0m
+  [1m[35m (10.6ms)[0m  [1m[35mALTER TABLE "contrata" ADD CONSTRAINT "fk_rails_e9354a6ad1"
+FOREIGN KEY ("linea_id")
+  REFERENCES "lineas" ("id")
+[0m
+  [1m[35m (10.8ms)[0m  [1m[35mALTER TABLE "es" ADD CONSTRAINT "fk_rails_467df2dcad"
+FOREIGN KEY ("fijomovil_id")
+  REFERENCES "fijomovils" ("id")
+[0m
+  [1m[35m (10.7ms)[0m  [1m[35mALTER TABLE "es" ADD CONSTRAINT "fk_rails_12db6b2070"
+FOREIGN KEY ("linea_id")
+  REFERENCES "lineas" ("id")
+[0m
+  [1m[35m (10.6ms)[0m  [1m[35mALTER TABLE "es2s" ADD CONSTRAINT "fk_rails_80e881b5a4"
+FOREIGN KEY ("contrato_id")
+  REFERENCES "contratos" ("id")
+[0m
+  [1m[35m (10.8ms)[0m  [1m[35mALTER TABLE "es2s" ADD CONSTRAINT "fk_rails_dfb25e5a11"
+FOREIGN KEY ("linea_id")
+  REFERENCES "lineas" ("id")
+[0m
+  [1m[35m (10.7ms)[0m  [1m[35mALTER TABLE "realizas" ADD CONSTRAINT "fk_rails_7ab0e64c72"
+FOREIGN KEY ("linea_id")
+  REFERENCES "lineas" ("id")
+[0m
+  [1m[35m (10.8ms)[0m  [1m[35mALTER TABLE "realizas" ADD CONSTRAINT "fk_rails_43b8f8d8e3"
+FOREIGN KEY ("pago_id")
+  REFERENCES "pagos" ("id")
+[0m
+  [1m[35m (10.8ms)[0m  [1m[35mALTER TABLE "separas" ADD CONSTRAINT "fk_rails_8691a2b103"
+FOREIGN KEY ("linea_id")
+  REFERENCES "lineas" ("id")
+[0m
+  [1m[35m (10.7ms)[0m  [1m[35mALTER TABLE "separas" ADD CONSTRAINT "fk_rails_30d90ed9f5"
+FOREIGN KEY ("segmento_id")
+  REFERENCES "segmentos" ("id")
+[0m
+  [1m[35m (76.4ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying PRIMARY KEY)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT version FROM "schema_migrations"[0m
+  [1m[35m (10.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES ('20161109040316')[0m
+  [1m[35m (11.0ms)[0m  [1m[32mINSERT INTO schema_migrations (version) VALUES ('20161106083330'), ('20161105171059'), ('20161105171037'), ('20161105171048'), ('20161105171129'), ('20161105171119'), ('20161105171150'), ('20161105171109'), ('20161105171200');
+
+[0m
+  [1m[35m (87.9ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", 2016-11-09 19:36:16 UTC], ["updated_at", 2016-11-09 19:36:16 UTC]]
+  [1m[35m (13.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (69.0ms)[0m  [1m[35mCREATE TABLE "atravesdes" ("id" serial primary key, "pago_id" integer, "mdp_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (53.6ms)[0m  [1m[35mCREATE  INDEX  "index_atravesdes_on_mdp_id" ON "atravesdes" USING btree ("mdp_id")[0m
+  [1m[35m (53.9ms)[0m  [1m[35mCREATE  INDEX  "index_atravesdes_on_pago_id" ON "atravesdes" USING btree ("pago_id")[0m
+  [1m[35m (99.3ms)[0m  [1m[35mCREATE TABLE "clientes" ("id" serial primary key, "id_cliente" integer, "rut_cliente" character varying, "mail_cliente" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (42.7ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_clientes_on_id_cliente" ON "clientes" USING btree ("id_cliente")[0m
+  [1m[35m (43.5ms)[0m  [1m[35mCREATE TABLE "contesta" ("id" serial primary key, "linea_id" integer, "encuesta_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (76.0ms)[0m  [1m[35mCREATE  INDEX  "index_contesta_on_encuesta_id" ON "contesta" USING btree ("encuesta_id")[0m
+  [1m[35m (42.7ms)[0m  [1m[35mCREATE  INDEX  "index_contesta_on_linea_id" ON "contesta" USING btree ("linea_id")[0m
+  [1m[35m (43.4ms)[0m  [1m[35mCREATE TABLE "contienes" ("id" serial primary key, "encuestum_id" integer, "preguntum_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (42.7ms)[0m  [1m[35mCREATE  INDEX  "index_contienes_on_encuestum_id" ON "contienes" USING btree ("encuestum_id")[0m
+  [1m[35m (42.9ms)[0m  [1m[35mCREATE  INDEX  "index_contienes_on_preguntum_id" ON "contienes" USING btree ("preguntum_id")[0m
+  [1m[35m (53.9ms)[0m  [1m[35mCREATE TABLE "contrata" ("id" serial primary key, "cliente_id" integer, "linea_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (42.6ms)[0m  [1m[35mCREATE  INDEX  "index_contrata_on_cliente_id" ON "contrata" USING btree ("cliente_id")[0m
+  [1m[35m (53.8ms)[0m  [1m[35mCREATE  INDEX  "index_contrata_on_linea_id" ON "contrata" USING btree ("linea_id")[0m
+  [1m[35m (87.9ms)[0m  [1m[35mCREATE TABLE "contratos" ("id" serial primary key, "id_contrato" integer, "tipo_contrato" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (53.9ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_contratos_on_id_contrato" ON "contratos" USING btree ("id_contrato")[0m
+  [1m[35m (88.1ms)[0m  [1m[35mCREATE TABLE "encuesta" ("id" serial primary key, "id_encuesta" integer, "fecha_creacion_encuesta" date, "motivo_encuesta" text, "resuelto_encuesta" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (53.7ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_encuesta_on_id_encuesta" ON "encuesta" USING btree ("id_encuesta")[0m
+  [1m[35m (54.6ms)[0m  [1m[35mCREATE TABLE "es" ("id" serial primary key, "fijomovil_id" integer, "linea_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (53.8ms)[0m  [1m[35mCREATE  INDEX  "index_es_on_fijomovil_id" ON "es" USING btree ("fijomovil_id")[0m
+  [1m[35m (54.0ms)[0m  [1m[35mCREATE  INDEX  "index_es_on_linea_id" ON "es" USING btree ("linea_id")[0m
+  [1m[35m (65.9ms)[0m  [1m[35mCREATE TABLE "es2s" ("id" serial primary key, "contrato_id" integer, "linea_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (53.8ms)[0m  [1m[35mCREATE  INDEX  "index_es2s_on_contrato_id" ON "es2s" USING btree ("contrato_id")[0m
+  [1m[35m (42.7ms)[0m  [1m[35mCREATE  INDEX  "index_es2s_on_linea_id" ON "es2s" USING btree ("linea_id")[0m
+  [1m[35m (77.1ms)[0m  [1m[35mCREATE TABLE "fijomovils" ("id" serial primary key, "id_fijomovil" integer, "tipo_fijomovil" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (53.9ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_fijomovils_on_id_fijomovil" ON "fijomovils" USING btree ("id_fijomovil")[0m
+  [1m[35m (76.8ms)[0m  [1m[35mCREATE TABLE "lineas" ("id" serial primary key, "id_linea" integer, "numero_cliente" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (42.8ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_lineas_on_id_linea" ON "lineas" USING btree ("id_linea")[0m
+  [1m[35m (99.1ms)[0m  [1m[35mCREATE TABLE "mdps" ("id" serial primary key, "id_mdp" integer, "nombre_mdp" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (52.6ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_mdps_on_id_mdp" ON "mdps" USING btree ("id_mdp")[0m
+  [1m[35m (87.2ms)[0m  [1m[35mCREATE TABLE "pagos" ("id" serial primary key, "id_pago" integer, "canal" text, "orden_compra" text, "fecha_transaccion" date, "hora" time, "cod_retorno" integer, "cod_autorizacion" integer, "monto" integer, "fecha_pago" timestamp, "fecha_ident_transaccion" date, "tel_movil" integer, "tel_fijo" integer, "cod_cliente" integer, "documento" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (53.7ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_pagos_on_id_pago" ON "pagos" USING btree ("id_pago")[0m
+  [1m[35m (88.2ms)[0m  [1m[35mCREATE TABLE "pregunta" ("id" serial primary key, "id_pregunta" integer, "tipo_pregunta" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (53.7ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_pregunta_on_id_pregunta" ON "pregunta" USING btree ("id_pregunta")[0m
+  [1m[35m (54.6ms)[0m  [1m[35mCREATE TABLE "realizas" ("id" serial primary key, "linea_id" integer, "pago_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (53.6ms)[0m  [1m[35mCREATE  INDEX  "index_realizas_on_linea_id" ON "realizas" USING btree ("linea_id")[0m
+  [1m[35m (53.8ms)[0m  [1m[35mCREATE  INDEX  "index_realizas_on_pago_id" ON "realizas" USING btree ("pago_id")[0m
+  [1m[35m (77.0ms)[0m  [1m[35mCREATE TABLE "segmentos" ("id" serial primary key, "id_segmento" integer, "tipo_segmento" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (53.9ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_segmentos_on_id_segmento" ON "segmentos" USING btree ("id_segmento")[0m
+  [1m[35m (43.5ms)[0m  [1m[35mCREATE TABLE "separas" ("id" serial primary key, "segmento_id" integer, "linea_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (42.6ms)[0m  [1m[35mCREATE  INDEX  "index_separas_on_linea_id" ON "separas" USING btree ("linea_id")[0m
+  [1m[35m (42.7ms)[0m  [1m[35mCREATE  INDEX  "index_separas_on_segmento_id" ON "separas" USING btree ("segmento_id")[0m
+  [1m[35m (87.0ms)[0m  [1m[35mCREATE TABLE "users" ("id" serial primary key, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" timestamp, "last_sign_in_at" timestamp, "current_sign_in_ip" inet, "last_sign_in_ip" inet, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (53.7ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_email" ON "users" USING btree ("email")[0m
+  [1m[35m (54.0ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_reset_password_token" ON "users" USING btree ("reset_password_token")[0m
+  [1m[35m (10.7ms)[0m  [1m[35mALTER TABLE "atravesdes" ADD CONSTRAINT "fk_rails_e6827fc5d3"
+FOREIGN KEY ("mdp_id")
+  REFERENCES "mdps" ("id")
+[0m
+  [1m[35m (10.8ms)[0m  [1m[35mALTER TABLE "atravesdes" ADD CONSTRAINT "fk_rails_e4d0d4cb75"
+FOREIGN KEY ("pago_id")
+  REFERENCES "pagos" ("id")
+[0m
+  [1m[35m (10.8ms)[0m  [1m[35mALTER TABLE "contesta" ADD CONSTRAINT "fk_rails_a2565d943e"
+FOREIGN KEY ("encuesta_id")
+  REFERENCES "encuesta" ("id")
+[0m
+  [1m[35m (10.8ms)[0m  [1m[35mALTER TABLE "contesta" ADD CONSTRAINT "fk_rails_e75083ea85"
+FOREIGN KEY ("linea_id")
+  REFERENCES "lineas" ("id")
+[0m
+  [1m[35m (10.8ms)[0m  [1m[35mALTER TABLE "contienes" ADD CONSTRAINT "fk_rails_20933a9f07"
+FOREIGN KEY ("encuestum_id")
+  REFERENCES "encuesta" ("id")
+[0m
+  [1m[35m (10.8ms)[0m  [1m[35mALTER TABLE "contienes" ADD CONSTRAINT "fk_rails_5d5134adb4"
+FOREIGN KEY ("preguntum_id")
+  REFERENCES "pregunta" ("id")
+[0m
+  [1m[35m (10.8ms)[0m  [1m[35mALTER TABLE "contrata" ADD CONSTRAINT "fk_rails_4646870d7d"
+FOREIGN KEY ("cliente_id")
+  REFERENCES "clientes" ("id")
+[0m
+  [1m[35m (10.7ms)[0m  [1m[35mALTER TABLE "contrata" ADD CONSTRAINT "fk_rails_e9354a6ad1"
+FOREIGN KEY ("linea_id")
+  REFERENCES "lineas" ("id")
+[0m
+  [1m[35m (10.7ms)[0m  [1m[35mALTER TABLE "es" ADD CONSTRAINT "fk_rails_467df2dcad"
+FOREIGN KEY ("fijomovil_id")
+  REFERENCES "fijomovils" ("id")
+[0m
+  [1m[35m (10.9ms)[0m  [1m[35mALTER TABLE "es" ADD CONSTRAINT "fk_rails_12db6b2070"
+FOREIGN KEY ("linea_id")
+  REFERENCES "lineas" ("id")
+[0m
+  [1m[35m (10.7ms)[0m  [1m[35mALTER TABLE "es2s" ADD CONSTRAINT "fk_rails_80e881b5a4"
+FOREIGN KEY ("contrato_id")
+  REFERENCES "contratos" ("id")
+[0m
+  [1m[35m (10.8ms)[0m  [1m[35mALTER TABLE "es2s" ADD CONSTRAINT "fk_rails_dfb25e5a11"
+FOREIGN KEY ("linea_id")
+  REFERENCES "lineas" ("id")
+[0m
+  [1m[35m (10.7ms)[0m  [1m[35mALTER TABLE "realizas" ADD CONSTRAINT "fk_rails_7ab0e64c72"
+FOREIGN KEY ("linea_id")
+  REFERENCES "lineas" ("id")
+[0m
+  [1m[35m (10.8ms)[0m  [1m[35mALTER TABLE "realizas" ADD CONSTRAINT "fk_rails_43b8f8d8e3"
+FOREIGN KEY ("pago_id")
+  REFERENCES "pagos" ("id")
+[0m
+  [1m[35m (10.8ms)[0m  [1m[35mALTER TABLE "separas" ADD CONSTRAINT "fk_rails_8691a2b103"
+FOREIGN KEY ("linea_id")
+  REFERENCES "lineas" ("id")
+[0m
+  [1m[35m (10.6ms)[0m  [1m[35mALTER TABLE "separas" ADD CONSTRAINT "fk_rails_30d90ed9f5"
+FOREIGN KEY ("segmento_id")
+  REFERENCES "segmentos" ("id")
+[0m
+  [1m[35m (76.9ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying PRIMARY KEY)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT version FROM "schema_migrations"[0m
+  [1m[35m (10.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES ('20161109040316')[0m
+  [1m[35m (10.9ms)[0m  [1m[32mINSERT INTO schema_migrations (version) VALUES ('20161106083330'), ('20161105171059'), ('20161105171037'), ('20161105171048'), ('20161105171129'), ('20161105171119'), ('20161105171150'), ('20161105171109'), ('20161105171200');
+
+[0m
+  [1m[35m (76.6ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", 2016-11-09 19:36:20 UTC], ["updated_at", 2016-11-09 19:36:20 UTC]]
+  [1m[35m (7.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(6084241157166926565);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(6084241157166926565)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (2.3ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'atravesdes'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (2.0ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'clientes'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (2.2ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'contesta'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (2.3ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'contienes'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (2.2ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'contrata'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (2.2ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'contratos'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (2.1ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'encuesta'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (2.2ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'es'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (2.3ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'es2s'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (2.1ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'fijomovils'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (2.2ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'lineas'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (2.2ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'mdps'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (2.1ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'pagos'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (2.2ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'pregunta'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (2.2ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'realizas'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (2.2ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'segmentos'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (2.2ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'separas'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (2.2ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'users'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT MAX("clientes"."id_cliente") FROM "clientes"[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "clientes" ("id_cliente", "rut_cliente", "mail_cliente", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["id_cliente", 1], ["rut_cliente", "125516203"], ["mail_cliente", "ingrid_carolag@hotmail.com"], ["created_at", 2016-11-09 19:38:23 UTC], ["updated_at", 2016-11-09 19:38:23 UTC]]
+  [1m[35m (31.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT MAX("clientes"."id_cliente") FROM "clientes"[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "clientes" ("id_cliente", "rut_cliente", "mail_cliente", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["id_cliente", 2], ["rut_cliente", "53433642"], ["mail_cliente", "cacs1976@hotmail.com"], ["created_at", 2016-11-09 19:38:24 UTC], ["updated_at", 2016-11-09 19:38:24 UTC]]
+  [1m[35m (8.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT MAX("clientes"."id_cliente") FROM "clientes"[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "clientes" ("id_cliente", "rut_cliente", "mail_cliente", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["id_cliente", 3], ["rut_cliente", "112660267"], ["mail_cliente", "juan_mart_inez_g@yahoo.com"], ["created_at", 2016-11-09 19:38:24 UTC], ["updated_at", 2016-11-09 19:38:24 UTC]]
+  [1m[35m (8.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT MAX("clientes"."id_cliente") FROM "clientes"[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "clientes" ("id_cliente", "rut_cliente", "mail_cliente", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["id_cliente", 4], ["rut_cliente", "70316471"], ["mail_cliente", "aleneumannp@gmail.com"], ["created_at", 2016-11-09 19:38:24 UTC], ["updated_at", 2016-11-09 19:38:24 UTC]]
+  [1m[35m (8.7ms)[0m  [1m[35mCOMMIT[0m
