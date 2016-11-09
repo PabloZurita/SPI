@@ -1,0 +1,1 @@
+json.array! @es2s, partial: 'es2s/es2', as: :es2

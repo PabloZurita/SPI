@@ -1,0 +1,1 @@
+json.array! @atravesdes, partial: 'atravesdes/atravesde', as: :atravesde

@@ -69,6 +69,6 @@ class SegmentosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def segmento_params
-      params.require(:segmento).permit(:id_segmento, :tipo_segmento, :linea_id)
+      params.require(:segmento).permit(:id_segmento, :tipo_segmento)
     end
 end

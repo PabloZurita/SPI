@@ -1,0 +1,1 @@
+json.array! @realizas, partial: 'realizas/realiza', as: :realiza

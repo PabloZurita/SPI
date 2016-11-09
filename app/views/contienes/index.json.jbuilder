@@ -1,0 +1,1 @@
+json.array! @contienes, partial: 'contienes/contiene', as: :contiene

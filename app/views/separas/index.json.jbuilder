@@ -1,0 +1,1 @@
+json.array! @separas, partial: 'separas/separa', as: :separa

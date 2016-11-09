@@ -17,7 +17,7 @@ class FijomovilsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create fijomovil" do
     assert_difference('Fijomovil.count') do
-      post fijomovils_url, params: { fijomovil: { id_fijomovil: @fijomovil.id_fijomovil, linea_id: @fijomovil.linea_id, tipo_fijomovil: @fijomovil.tipo_fijomovil } }
+      post fijomovils_url, params: { fijomovil: { id_fijomovil: @fijomovil.id_fijomovil, tipo_fijomovil: @fijomovil.tipo_fijomovil } }
     end
 
     assert_redirected_to fijomovil_url(Fijomovil.last)
@@ -34,7 +34,7 @@ class FijomovilsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update fijomovil" do
-    patch fijomovil_url(@fijomovil), params: { fijomovil: { id_fijomovil: @fijomovil.id_fijomovil, linea_id: @fijomovil.linea_id, tipo_fijomovil: @fijomovil.tipo_fijomovil } }
+    patch fijomovil_url(@fijomovil), params: { fijomovil: { id_fijomovil: @fijomovil.id_fijomovil, tipo_fijomovil: @fijomovil.tipo_fijomovil } }
     assert_redirected_to fijomovil_url(@fijomovil)
   end
 

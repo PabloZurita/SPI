@@ -1,0 +1,1 @@
+json.array! @contrata, partial: 'contrata/contratum', as: :contratum

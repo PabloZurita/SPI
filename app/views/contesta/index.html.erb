@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Contesta</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Linea</th>
+      <th>Encuesta</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @contesta.each do |contestum| %>
+      <tr>
+        <td><%= contestum.linea %></td>
+        <td><%= contestum.encuesta %></td>
+        <td><%= link_to 'Show', contestum %></td>
+        <td><%= link_to 'Edit', edit_contestum_path(contestum) %></td>
+        <td><%= link_to 'Destroy', contestum, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Contestum', new_contestum_path %>

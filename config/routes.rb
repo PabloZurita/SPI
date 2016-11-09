@@ -1,13 +1,19 @@
 Rails.application.routes.draw do
-  get 'parcial_calculos/listar'
-
+  resources :realizas
+  resources :atravesdes
   resources :pagos
   resources :mdps
+  resources :contesta
+  resources :contienes
   resources :encuesta
   resources :pregunta
+  resources :es
   resources :fijomovils
+  resources :es2s
   resources :contratos
+  resources :separas
   resources :segmentos
+  resources :contrata
   resources :lineas
   resources :clientes
   get 'welcome/index'

@@ -1,0 +1,27 @@
+<%= form_for(contratum) do |f| %>
+  <% if contratum.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(contratum.errors.count, "error") %> prohibited this contratum from being saved:</h2>
+
+      <ul>
+      <% contratum.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :cliente_id %>
+    <%= f.text_field :cliente_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :linea_id %>
+    <%= f.text_field :linea_id %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

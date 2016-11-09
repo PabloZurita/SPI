@@ -3,9 +3,7 @@
 one:
   id_pregunta: 1
   tipo_pregunta: MyString
-  valor_pregunta: 1
 
 two:
   id_pregunta: 1
   tipo_pregunta: MyString
-  valor_pregunta: 1

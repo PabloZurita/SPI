@@ -1,0 +1,2 @@
+module ContestaHelper
+end

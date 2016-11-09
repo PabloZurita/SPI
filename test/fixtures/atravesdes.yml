@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  pago: one
+  mdp: one
+
+two:
+  pago: two
+  mdp: two

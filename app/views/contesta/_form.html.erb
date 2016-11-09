@@ -1,0 +1,27 @@
+<%= form_for(contestum) do |f| %>
+  <% if contestum.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(contestum.errors.count, "error") %> prohibited this contestum from being saved:</h2>
+
+      <ul>
+      <% contestum.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :linea_id %>
+    <%= f.text_field :linea_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :encuesta_id %>
+    <%= f.text_field :encuesta_id %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

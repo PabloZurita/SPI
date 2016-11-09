@@ -17,7 +17,7 @@ class LineasControllerTest < ActionDispatch::IntegrationTest
 
   test "should create linea" do
     assert_difference('Linea.count') do
-      post lineas_url, params: { linea: { cliente_id: @linea.cliente_id, id_linea: @linea.id_linea } }
+      post lineas_url, params: { linea: { id_linea: @linea.id_linea, numero_cliente: @linea.numero_cliente } }
     end
 
     assert_redirected_to linea_url(Linea.last)
@@ -34,7 +34,7 @@ class LineasControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update linea" do
-    patch linea_url(@linea), params: { linea: { cliente_id: @linea.cliente_id, id_linea: @linea.id_linea } }
+    patch linea_url(@linea), params: { linea: { id_linea: @linea.id_linea, numero_cliente: @linea.numero_cliente } }
     assert_redirected_to linea_url(@linea)
   end
 

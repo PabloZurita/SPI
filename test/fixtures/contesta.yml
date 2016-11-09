@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  linea: one
+  encuesta: one
+
+two:
+  linea: two
+  encuesta: two

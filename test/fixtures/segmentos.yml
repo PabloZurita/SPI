@@ -3,9 +3,7 @@
 one:
   id_segmento: 1
   tipo_segmento: MyString
-  linea: one
 
 two:
   id_segmento: 1
   tipo_segmento: MyString
-  linea: two

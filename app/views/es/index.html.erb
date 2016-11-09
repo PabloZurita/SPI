@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Es</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Fijomovil</th>
+      <th>Linea</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @es.each do |e| %>
+      <tr>
+        <td><%= e.fijomovil %></td>
+        <td><%= e.linea %></td>
+        <td><%= link_to 'Show', e %></td>
+        <td><%= link_to 'Edit', edit_e_path(e) %></td>
+        <td><%= link_to 'Destroy', e, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New E', new_e_path %>

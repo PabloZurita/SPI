@@ -1,0 +1,27 @@
+<%= form_for(atravesde) do |f| %>
+  <% if atravesde.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(atravesde.errors.count, "error") %> prohibited this atravesde from being saved:</h2>
+
+      <ul>
+      <% atravesde.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :pago_id %>
+    <%= f.text_field :pago_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :mdp_id %>
+    <%= f.text_field :mdp_id %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

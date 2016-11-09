@@ -69,6 +69,6 @@ class FijomovilsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def fijomovil_params
-      params.require(:fijomovil).permit(:id_fijomovil, :tipo_fijomovil, :linea_id)
+      params.require(:fijomovil).permit(:id_fijomovil, :tipo_fijomovil)
     end
 end

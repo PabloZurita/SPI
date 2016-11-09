@@ -1,0 +1,27 @@
+<%= form_for(realiza) do |f| %>
+  <% if realiza.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(realiza.errors.count, "error") %> prohibited this realiza from being saved:</h2>
+
+      <ul>
+      <% realiza.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :linea_id %>
+    <%= f.text_field :linea_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :pago_id %>
+    <%= f.text_field :pago_id %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

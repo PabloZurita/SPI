@@ -17,7 +17,7 @@ class PagosControllerTest < ActionDispatch::IntegrationTest
 
   test "should create pago" do
     assert_difference('Pago.count') do
-      post pagos_url, params: { pago: { canal: @pago.canal, cod_autorizacion: @pago.cod_autorizacion, cod_cliente: @pago.cod_cliente, cod_retorno: @pago.cod_retorno, documento: @pago.documento, fecha_ident_transaccion: @pago.fecha_ident_transaccion, fecha_pago: @pago.fecha_pago, fecha_transaccion: @pago.fecha_transaccion, hora: @pago.hora, id_pago: @pago.id_pago, linea_id: @pago.linea_id, mdp_id: @pago.mdp_id, monto: @pago.monto, orden_compra: @pago.orden_compra, tel_fijo: @pago.tel_fijo, tel_movil: @pago.tel_movil } }
+      post pagos_url, params: { pago: { canal: @pago.canal, cod_autorizacion: @pago.cod_autorizacion, cod_cliente: @pago.cod_cliente, cod_retorno: @pago.cod_retorno, documento: @pago.documento, fecha_ident_transaccion: @pago.fecha_ident_transaccion, fecha_pago: @pago.fecha_pago, fecha_transaccion: @pago.fecha_transaccion, hora: @pago.hora, id_pago: @pago.id_pago, monto: @pago.monto, orden_compra: @pago.orden_compra, tel_fijo: @pago.tel_fijo, tel_movil: @pago.tel_movil } }
     end
 
     assert_redirected_to pago_url(Pago.last)
@@ -34,7 +34,7 @@ class PagosControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update pago" do
-    patch pago_url(@pago), params: { pago: { canal: @pago.canal, cod_autorizacion: @pago.cod_autorizacion, cod_cliente: @pago.cod_cliente, cod_retorno: @pago.cod_retorno, documento: @pago.documento, fecha_ident_transaccion: @pago.fecha_ident_transaccion, fecha_pago: @pago.fecha_pago, fecha_transaccion: @pago.fecha_transaccion, hora: @pago.hora, id_pago: @pago.id_pago, linea_id: @pago.linea_id, mdp_id: @pago.mdp_id, monto: @pago.monto, orden_compra: @pago.orden_compra, tel_fijo: @pago.tel_fijo, tel_movil: @pago.tel_movil } }
+    patch pago_url(@pago), params: { pago: { canal: @pago.canal, cod_autorizacion: @pago.cod_autorizacion, cod_cliente: @pago.cod_cliente, cod_retorno: @pago.cod_retorno, documento: @pago.documento, fecha_ident_transaccion: @pago.fecha_ident_transaccion, fecha_pago: @pago.fecha_pago, fecha_transaccion: @pago.fecha_transaccion, hora: @pago.hora, id_pago: @pago.id_pago, monto: @pago.monto, orden_compra: @pago.orden_compra, tel_fijo: @pago.tel_fijo, tel_movil: @pago.tel_movil } }
     assert_redirected_to pago_url(@pago)
   end
 

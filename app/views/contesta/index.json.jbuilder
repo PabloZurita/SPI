@@ -1,0 +1,1 @@
+json.array! @contesta, partial: 'contesta/contestum', as: :contestum

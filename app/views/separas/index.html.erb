@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Separas</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Segmento</th>
+      <th>Linea</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @separas.each do |separa| %>
+      <tr>
+        <td><%= separa.segmento %></td>
+        <td><%= separa.linea %></td>
+        <td><%= link_to 'Show', separa %></td>
+        <td><%= link_to 'Edit', edit_separa_path(separa) %></td>
+        <td><%= link_to 'Destroy', separa, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Separa', new_separa_path %>

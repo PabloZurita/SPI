@@ -17,7 +17,7 @@ class SegmentosControllerTest < ActionDispatch::IntegrationTest
 
   test "should create segmento" do
     assert_difference('Segmento.count') do
-      post segmentos_url, params: { segmento: { id_segmento: @segmento.id_segmento, linea_id: @segmento.linea_id, tipo_segmento: @segmento.tipo_segmento } }
+      post segmentos_url, params: { segmento: { id_segmento: @segmento.id_segmento, tipo_segmento: @segmento.tipo_segmento } }
     end
 
     assert_redirected_to segmento_url(Segmento.last)
@@ -34,7 +34,7 @@ class SegmentosControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update segmento" do
-    patch segmento_url(@segmento), params: { segmento: { id_segmento: @segmento.id_segmento, linea_id: @segmento.linea_id, tipo_segmento: @segmento.tipo_segmento } }
+    patch segmento_url(@segmento), params: { segmento: { id_segmento: @segmento.id_segmento, tipo_segmento: @segmento.tipo_segmento } }
     assert_redirected_to segmento_url(@segmento)
   end
 

@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Es2s</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Contrato</th>
+      <th>Linea</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @es2s.each do |es2| %>
+      <tr>
+        <td><%= es2.contrato %></td>
+        <td><%= es2.linea %></td>
+        <td><%= link_to 'Show', es2 %></td>
+        <td><%= link_to 'Edit', edit_es2_path(es2) %></td>
+        <td><%= link_to 'Destroy', es2, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Es2', new_es2_path %>

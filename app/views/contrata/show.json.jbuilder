@@ -1,0 +1,1 @@
+json.partial! "contrata/contratum", contratum: @contratum

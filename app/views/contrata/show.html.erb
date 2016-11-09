@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Cliente:</strong>
+  <%= @contratum.cliente %>
+</p>
+
+<p>
+  <strong>Linea:</strong>
+  <%= @contratum.linea %>
+</p>
+
+<%= link_to 'Edit', edit_contratum_path(@contratum) %> |
+<%= link_to 'Back', contrata_path %>

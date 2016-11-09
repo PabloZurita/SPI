@@ -2,16 +2,12 @@
 
 one:
   id_encuesta: 1
-  fecha_creacion_encuesta: 2016-11-06
+  fecha_creacion_encuesta: 2016-11-09
   motivo_encuesta: MyText
   resuelto_encuesta: 1
-  linea: one
-  preguntum: one
 
 two:
   id_encuesta: 1
-  fecha_creacion_encuesta: 2016-11-06
+  fecha_creacion_encuesta: 2016-11-09
   motivo_encuesta: MyText
   resuelto_encuesta: 1
-  linea: two
-  preguntum: two

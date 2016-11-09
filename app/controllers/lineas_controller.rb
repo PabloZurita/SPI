@@ -69,6 +69,6 @@ class LineasController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def linea_params
-      params.require(:linea).permit(:id_linea, :cliente_id)
+      params.require(:linea).permit(:id_linea, :numero_cliente)
     end
 end

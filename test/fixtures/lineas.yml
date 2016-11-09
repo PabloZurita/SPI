@@ -2,8 +2,8 @@
 
 one:
   id_linea: 1
-  cliente: one
+  numero_cliente: MyString
 
 two:
   id_linea: 1
-  cliente: two
+  numero_cliente: MyString

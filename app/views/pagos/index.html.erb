@@ -19,8 +19,6 @@
       <th>Tel fijo</th>
       <th>Cod cliente</th>
       <th>Documento</th>
-      <th>Linea</th>
-      <th>Mdp</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -42,8 +40,6 @@
         <td><%= pago.tel_fijo %></td>
         <td><%= pago.cod_cliente %></td>
         <td><%= pago.documento %></td>
-        <td><%= pago.linea %></td>
-        <td><%= pago.mdp %></td>
         <td><%= link_to 'Show', pago %></td>
         <td><%= link_to 'Edit', edit_pago_path(pago) %></td>
         <td><%= link_to 'Destroy', pago, method: :delete, data: { confirm: 'Are you sure?' } %></td>

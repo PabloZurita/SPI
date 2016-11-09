@@ -69,6 +69,6 @@ class PagosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def pago_params
-      params.require(:pago).permit(:id_pago, :canal, :orden_compra, :fecha_transaccion, :hora, :cod_retorno, :cod_autorizacion, :monto, :fecha_pago, :fecha_ident_transaccion, :tel_movil, :tel_fijo, :cod_cliente, :documento, :linea_id, :mdp_id)
+      params.require(:pago).permit(:id_pago, :canal, :orden_compra, :fecha_transaccion, :hora, :cod_retorno, :cod_autorizacion, :monto, :fecha_pago, :fecha_ident_transaccion, :tel_movil, :tel_fijo, :cod_cliente, :documento)
     end
 end

@@ -1,0 +1,1 @@
+json.partial! "atravesdes/atravesde", atravesde: @atravesde

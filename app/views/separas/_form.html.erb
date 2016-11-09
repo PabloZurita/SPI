@@ -1,0 +1,27 @@
+<%= form_for(separa) do |f| %>
+  <% if separa.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(separa.errors.count, "error") %> prohibited this separa from being saved:</h2>
+
+      <ul>
+      <% separa.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :segmento_id %>
+    <%= f.text_field :segmento_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :linea_id %>
+    <%= f.text_field :linea_id %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,1 @@
+json.partial! "contesta/contestum", contestum: @contestum

@@ -1,5 +1,5 @@
 class Cliente < ApplicationRecord
-	has_many :lineas
+	has_many :contrata
 	before_create :set_id_cliente
 	def set_id_cliente
 	  last_id_cliente = Cliente.maximum(:id_cliente)

@@ -1,0 +1,27 @@
+<%= form_for(contiene) do |f| %>
+  <% if contiene.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(contiene.errors.count, "error") %> prohibited this contiene from being saved:</h2>
+
+      <ul>
+      <% contiene.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :encuestum_id %>
+    <%= f.text_field :encuestum_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :preguntum_id %>
+    <%= f.text_field :preguntum_id %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
