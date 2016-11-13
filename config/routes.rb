@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :indicadoresacumulados
+  resources :indicadoresdiarios
   resources :respuesta
   resources :encuesta
   resources :motivos

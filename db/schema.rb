@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161113023502) do
+ActiveRecord::Schema.define(version: 20161113033757) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,28 @@ ActiveRecord::Schema.define(version: 20161113023502) do
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.index ["id_fijomovil"], name: "index_fijomovils_on_id_fijomovil", unique: true, using: :btree
+  end
+
+  create_table "indicadoresacumulados", force: :cascade do |t|
+    t.integer  "id_ind_acumulado"
+    t.float    "isn"
+    t.float    "resp_1_2"
+    t.float    "resp_4_5"
+    t.date     "fecha"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.index ["id_ind_acumulado"], name: "index_indicadoresacumulados_on_id_ind_acumulado", unique: true, using: :btree
+  end
+
+  create_table "indicadoresdiarios", force: :cascade do |t|
+    t.integer  "id_ind_diario"
+    t.float    "isn"
+    t.float    "resp_1_2"
+    t.float    "resp_4_5"
+    t.date     "fecha"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["id_ind_diario"], name: "index_indicadoresdiarios_on_id_ind_diario", unique: true, using: :btree
   end
 
   create_table "lineas", force: :cascade do |t|
