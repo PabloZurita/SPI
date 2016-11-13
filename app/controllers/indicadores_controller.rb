@@ -6,7 +6,7 @@ class IndicadoresController < ApplicationController
 	puts "Cantidad = #{$cantidad}"
 	#Falta recuperar la fecha de hoy#
 
-	@saludo_1 = Cliente.find_by_mail_cliente("gioconda134@hotmail.com");
+	@saludo_1 = Cliente.find_by_mail_cliente("eimybelen_0713@hotmail.com");
 	
 	#puts "Hola #{@saludo_1.mail_cliente}"
 	$aux = 0
