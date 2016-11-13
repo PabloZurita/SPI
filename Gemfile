@@ -1,6 +1,8 @@
 source 'https://rubygems.org'
 
 gem 'bootstrap', '~> 4.0.0.alpha5'
+gem 'bootstrap-sass', '~> 3.3.6'
+
 gem 'autoprefixer-rails'
 
 gem 'devise'
