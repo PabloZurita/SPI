@@ -1,5 +1,5 @@
 class IndicadoresController < ApplicationController
-  def index
+  def prueba_indicadores 
 	$saludo_2 = Cliente.all();
 	$i = 0
 	$cantidad = $saludo_2.length();

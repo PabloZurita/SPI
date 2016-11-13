@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'indicadores/prueba_indicadores'
+
   resources :indicadoresacumulados
   resources :indicadoresdiarios
   resources :respuesta
