@@ -6,9 +6,8 @@
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	<title>SPI</title>
 	<%= csrf_meta_tags %>
-
-	<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-	<%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+	<%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+	<%= javascript_include_tag 'jquery-1.11.3.min', 'rails', 'highcharts' %>
 </head>
 
 <body>
@@ -29,13 +28,12 @@
 			<%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
 			<%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
 
-		<nav>
+			<nav>
 
 
 				<% end %>
 
 				<%= yield %>
 
-
 			</body>
-			</html>
+</html>

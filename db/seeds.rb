@@ -48,10 +48,10 @@ lista_clientes= [
   [ "168351003","edith.ibarra1@gmail.com" ],[ "93665155","christian.vanderschraft@gsf.cl" ],[ "179699753","elizabeth.tiznado@gmail.com" ],[ "98505695","richard.faundez@vtr.net" ],[ "80593724","abastecimiento@llorente.cl" ],
   [ "219347685","carlos.hernan.diaz@hotmail.com" ],[ "93649257","jaosan@gmail.com" ],[ "118196198","ricardohantofagasta@yahoo.es" ],[ "11632511K","patricio.pino4767@gmail.com" ],[ "167347320","MAKA.SIGGES@GMAIL.COM" ],
   ["185937712","vania.f.l@hotmail.com"],["185714306","martazfp@gmail.com"],["70329808","ignacioeguiguren@hotmail.com"],["134066547","cesfamlm@gmail.com"],["112582886","orietta.arqueros@gmail.com"],
-  ["108550619","bmdinamarcaf@yahoo.es"],["59957236","h.echeverria.c@gmail.com"],["236194361","chavez.9991@gmail.com"],["126601794","jossandon@gmail.com"],["56302409","rolygo@hotmail.com"],	
-  ["161165697","Mleonbustos54@gmail.com"],["125568432","migambiado@gmail.com"],["13605192K","punzueta@ft.cl"],["243984149","mado_23@hotmail.com"],["10608467K","jocortes@interexport.cl"],	
+  ["108550619","bmdinamarcaf@yahoo.es"],["59957236","h.echeverria.c@gmail.com"],["236194361","chavez.9991@gmail.com"],["126601794","jossandon@gmail.com"],["56302409","rolygo@hotmail.com"],  
+  ["161165697","Mleonbustos54@gmail.com"],["125568432","migambiado@gmail.com"],["13605192K","punzueta@ft.cl"],["243984149","mado_23@hotmail.com"],["10608467K","jocortes@interexport.cl"],  
   ["166445086","ignacio.morales.1987@gmail.com"],["130210031","nelvemed@gmail.com"],["122155692","cecilia.garmendia@gmail.com"],["119584191","mariaeugenia.gonzalez@umag.cl"],["100284812","josenortino@yahoo.es"],
-  ["119450322","yanitabelmar@hotmail.com"],["144410483","bobita_79@hotmail.com"],["17960101K","catacoxq7@gmail.com"]	
+  ["119450322","yanitabelmar@hotmail.com"],["144410483","bobita_79@hotmail.com"],["17960101K","catacoxq7@gmail.com"]  
 ]
 
 lista_clientes.each do |rut_cliente, mail_cliente|
