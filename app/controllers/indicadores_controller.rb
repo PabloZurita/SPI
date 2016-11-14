@@ -1,5 +1,5 @@
 class IndicadoresController < ApplicationController
-  def prueba_indicadores 
+  def index 
 
 	puts "Cantidad = #{$cantidad}"
 
@@ -16,15 +16,14 @@ class IndicadoresController < ApplicationController
 	resolucion_positiva = 0;
 	resolucion_negativa = 0;
 	while $i < $cantidad  do
-   		if @enc_deldia[i].resuelto_encuesta == 1
+   		if @enc_deldia[$i].resuelto_encuesta == 1
 			resolucion_positiva += 1;
 		else
 			resolucion_negativa += 1;
 		end
-   		i+=1
+   		$i+=1
 	end
 	puts"negatividad #{resolucion_negativa}, positividad #{resolucion_positiva}"
-
 
 
   end

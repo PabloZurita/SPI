@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'cal_unoydos/prueba'
+
   get 'indicadores/prueba_indicadores'
 
   resources :indicadoresacumulados
