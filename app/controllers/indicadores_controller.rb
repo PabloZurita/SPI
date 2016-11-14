@@ -1,19 +1,30 @@
 class IndicadoresController < ApplicationController
-  def index
-	$saludo_2 = Cliente.all();
-	$i = 0
-	$cantidad = $saludo_2.length();
-	puts "Cantidad = #{$cantidad}"
-	#Falta recuperar la fecha de hoy#
+  def index 
 
-	@saludo_1 = Cliente.find_by_mail_cliente("gioconda134@hotmail.com");
+	puts "Cantidad = #{$cantidad}"
+
+	#### Calculando indicadores ####
+	## aqui get fecha de lo que se desea actualizar en relacion a los indicadores
+	$fecha = "2016-10-11";
+	#@enc_deldia = Encuestum.find_by_all_fecha_creacion_encuesta($fecha);
 	
-	#puts "Hola #{@saludo_1.mail_cliente}"
+	@enc_deldia = Encuestum.where(fecha_creacion_encuesta: '2016-10-11')
+	$cantidad = @enc_deldia.length();
+	#puts"CANTIDAD #{$cantidad}"
 	$aux = 0
+	$i = 0
+	resolucion_positiva = 0;
+	resolucion_negativa = 0;
 	while $i < $cantidad  do
-   		$i +=1
-		$aux = $saludo_2.find_by_id_cliente($i).id_cliente + $aux
-		puts " auxiliar #{$aux}"
-	end 
+   		if @enc_deldia[$i].resuelto_encuesta == 1
+			resolucion_positiva += 1;
+		else
+			resolucion_negativa += 1;
+		end
+   		$i+=1
+	end
+	puts"negatividad #{resolucion_negativa}, positividad #{resolucion_positiva}"
+
+
   end
 end
