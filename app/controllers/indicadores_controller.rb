@@ -1,14 +1,14 @@
 class IndicadoresController < ApplicationController
   def prueba_indicadores 
 
-	puts "Cantidad = #{$cantidad}"
+	#puts "Cantidad = #{$cantidad}"
 
 	#### Calculando indicadores ####
 	## aqui get fecha de lo que se desea actualizar en relacion a los indicadores
-	fecha = '2016-10-11';
+	fecha = '2016/10/11';
 	cantidad = Encuestum.all
 	cantidad = cantidad.length()
-	puts"cantidad #{cantidad}"
+	#puts"cantidad #{cantidad}"
 	#@enc_deldia = Encuestum.find_by_all_fecha_creacion_encuesta($fecha);
 	resolucion_positiva= Encuestum.where( resuelto_encuesta: 1)
 	resolucion_negativa= Encuestum.where( resuelto_encuesta: 0)
@@ -34,11 +34,11 @@ class IndicadoresController < ApplicationController
 	#puts "pre_5#{cantidad_pre5}"
 	
 	nuevo_dia = Indicadoresdiario.new();
-	nuevo_dia.isn = resolucion_positiva
-	nuevo_dia.resp_1_2 = cantidad_pre1+cantidad_pre2
-	nuevo_dia.resp_4_5 = cantidad_pre5+cantidad_pre4
+	nuevo_dia.isn = cantidad_pos
+	nuevo_dia.resp_1_2 = (cantidad_pre1+cantidad_pre2)/1
+	nuevo_dia.resp_4_5 = (cantidad_pre5+cantidad_pre4)/1
 	nuevo_dia.fecha = fecha
-	nuevo_dia.save();
+	nuevo_dia.save()
 	
   end
 end
