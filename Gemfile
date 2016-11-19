@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'lazy_high_charts'
+
 gem 'bootstrap', '~> 4.0.0.alpha5'
 
 gem 'autoprefixer-rails'

@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   resources :contratos
   resources :fijomovils
   resources :segmentos
-  resources :clientes
+  resources :clientess
   get 'welcome/index'
   devise_for :users
   root 'welcome#index'
