@@ -5,8 +5,7 @@
 
 # Example:
 #
-# set :output, "/path/to/my/cron_log.log"
-#
+set :output, "log/cron.log"  #Step 1#
 # every 2.hours do
 #   command "/usr/bin/some_great_command"
 #   runner "MyModel.some_method"
@@ -18,3 +17,9 @@
 # end
 
 # Learn more: http://github.com/javan/whenever
+
+every 5.minutes do
+  # specify the task name as a string
+  puts "Si se ejecuta "
+  rake "calcular_indicador:task_consultar"
+end
