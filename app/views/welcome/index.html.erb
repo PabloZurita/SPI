@@ -35,47 +35,18 @@
 
 </head>
 
+
 <body>
-  
+
   <div id="wrapper">
-      
-
-    <div class="navbar-default sidebar" role="navigation">
-                <div class="sidebar-nav navbar-collapse">
-                    <ul class="nav" id="side-menu">
-                        <li class="sidebar-search">
-
-                            <!-- /input-group -->
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
-                        </li>
-
-                        <li>
-                            <a href="#"><i class="fa fa-bar-chart"></i> Historico</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-cloud"></i> Nube de Palabras</a>
-                        </li>
-
-                        <li>
-                            <a href="#"><i class="fa fa-line-chart"></i> Mas gráficos</a>
-                        </li>
-
-                        <li>
-                            <a href="#"><i class="fa fa-wrench fa-fw"></i> Configuraciones</a>
-                        </li>
-
-                    </ul>
-                </div>
-                <!-- /.sidebar-collapse -->
-    </div>
 
 
 <div>
+
     <div class="container">
+
       <div class="row">
-        <div class="col-sm-12 text-center bootstrap-welcome">
+        <div class="col-sm-20 text-center bootstrap-welcome">
 
             <div class="row">
                 <div class="col-lg-3 col-md-6">
@@ -188,11 +159,16 @@
       series: [{
         pointInterval: <%= 1.day * 1000 %>,
         pointsStart: <%= 3.weeks.ago.to_i * 1000 %>,
-        data: [1,2,4,5,4,5,6]
+        data: [<% @encuesta.each do |encuesta| %>
+        <%= encuesta.resuelto_encuesta %>,
+        <% end %> ]
       }]
     });
   });
 </script>
 <div id="grafico_ISN" style="width:560px; height: 300px; margin: 50px auto"></div>
 
+
+
 </body>
+
